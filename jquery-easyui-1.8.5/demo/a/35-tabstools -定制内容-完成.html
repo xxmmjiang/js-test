@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tabs Tools - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	
+<style>
+
+
+/******accordion*******/
+#id_projectinfomation_accordion *{
+	 padding: 0;
+	 margin: 0;
+}
+
+/**展开按钮**/
+#id_projectinfomation_accordion .accordion-header-selected{
+    background: url("./img2/expand.png") no-repeat 30px center !important;
+    border: none;
+}
+/**折叠按钮**/
+#id_projectinfomation_accordion .accordion-header{
+	height:50px;
+    padding: 0;
+    background: url("./img2/collapse.png") no-repeat 30px center;
+    border: none;
+}
+/**分类---标题**/
+#id_projectinfomation_accordion .panel-title{
+	
+    color: #00000;
+    font-weight: normal;
+    font-size: 15px;
+	padding-top:15px;
+    padding-left: 50px;
+
+}
+/**分类---标题文字--悬浮**/
+#id_projectinfomation_accordion .panel-title:hover{
+	/*蓝色*/
+    color: #038de0;
+}
+
+/**原生的折叠按钮 隐藏*/
+#id_projectinfomation_accordion .accordion-header .accordion-collapse{
+   display: none;
+}
+/**分类---标题div--悬浮**/
+#id_projectinfomation_accordion .accordion-header:hover{
+	/*蓝色*/
+    color: #038de0;
+}
+
+/**tool按钮*/
+#id_projectinfomation_accordion .panel-tool a{
+    margin: 0 0 0 4px;
+    background-size: 16px;
+}
+
+#id_projectinfomation_accordion .panel-tool a:hover{
+    background-size: 16px;
+}
+
+#id_projectinfomation_accordion .icon-save{
+    background: url("./img2/save.png") no-repeat center;
+}
+
+#id_projectinfomation_accordion .icon-save:hover{
+    background: url("./img2/saveHover.png") no-repeat center;
+}
+
+#id_projectinfomation_accordion .icon-cancel{
+    background: url("./img2/cancel.png") no-repeat center;
+}
+
+#id_projectinfomation_accordion .icon-cancel:hover{
+    background: url("./img2/cancelHover.png") no-repeat center;
+}
+
+#id_projectinfomation_accordion .icon-edit{
+    background: url("./img2/edit.png") no-repeat center;
+}
+
+#id_projectinfomation_accordion .icon-edit:hover{
+    background: url("./img2/editHover.png") no-repeat center;
+}
+
+
+/*内容样式外部区域*/
+#id_projectinfomation_accordion table, #id_projectinfomation_accordion .datagrid ,#id_projectinfomation_accordion  .datagrid-wrap,#id_projectinfomation_accordion  .datagrid-view,#id_projectinfomation_accordion  .datagrid-view2{
+	width: 100% !important;
+	padding: 0px;
+	margin: 0px;
+	border: 0;
+}
+
+
+/***不显示datagrid的 toolbar **/
+#id_projectinfomation_accordion  .datagrid-toolbar{
+	display: none;
+}
+/***不显示datagrid的 head**/
+#id_projectinfomation_accordion  .datagrid-header{
+	display: none;
+}
+
+/**行被选择时的状态*/
+#id_projectinfomation_accordion .datagrid-body .datagrid-row-selected{
+	background-color: transparent !important;
+	background: url(./img2/trSelected.png) no-repeat center !important;
+	background-size: cover !important;
+}
+
+/**这里必须非常精确，因为在编辑状态时，td里面还有个table（里面也有td），*/
+#id_projectinfomation_accordion  .datagrid-body>.datagrid-btable>tbody>tr>td{
+	border: none;
+	border-style: none;
+	width: 50%;
+	height:40px;
+	line-height: 40px;
+	padding: 0;
+	margin: 0;
+	/*每行的底线:灰色*/
+	border-bottom: 1px solid #DADDDE;
+}
+
+/**输入框的外边框*/
+#id_projectinfomation_accordion  .datagrid-body>.datagrid-btable>tbody>tr>td span{
+	background-color: transparent;
+	background: transparent;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 36px !important;
+	border: 1px solid #108ee9;	
+	line-height: 36px !important;
+}
+
+
+/**单元格内时**/
+#id_projectinfomation_accordion .datagrid-body>.datagrid-btable>tbody>tr>td span input{
+	/**输入框文字居中*/
+	text-align: center ;
+	font-size: 14px ;
+	font-family: "Microsoft YaHei";
+}
+
+/*不知干啥用的，但是一旦去掉，标题就左对齐了，神奇！*/
+#id_projectinfomation_accordion div{
+
+}
+
+/*表格head样式*/
+.EngineeringAttributeHead{
+	padding-left: 50px;
+	width: 100%;
+	height: 40px;
+	position: relative;
+	line-height: 40px;
+	font-size: 14px;
+	font-family: "Microsoft YaHei";
+	text-align: center !important;
+}
+.EngineeringAttributeHead .atrributeName{
+	width: 50%;
+	height: 100%;
+	line-height: 40px;
+	float: left;
+}
+.EngineeringAttributeHead .atrributeValue{
+	width: 50%;
+	height: 100%;
+	line-height: 40px;
+	float: left;
+}
+
+
+/*滚动条样式---start**/
+::-webkit-scrollbar{ /*滚动条整体样式*/
+	height: 9px !important; /*高宽分别对应横竖滚动条的尺寸*/
+	width: 9px !important;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 0;
+	border-style: dashed;
+	background-color: rgb(205,205,205);
+	border-color: transparent;
+	border-width: 1.5px;
+	background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: rgb(205,205,205);
+}
+::-webkit-scrollbar-button{
+	display: none;
+}
+::-webkit-scrollbar-corner {
+	display: none;
+}
+/*滚动条样式---end**/
+	</style>
+</head>
+<body>
+	
+<div  style="margin:20px;width:600px;height:600px;border:1px green solid;">
+	<!--工程信息  start-->
+	<div id="id_projectinfomation_accordion" class="easyui-accordion" title="工程信息" data-options="border:true,fit:true"
+		style="border-bottom-width:0;border-top-width:0;border-right:0;border-left:0px solid #bfbfbf;">
+		<div title="基本信息"  data-options="tools:'#id_projectinfomation_accordion_tool1'">
+			<div class="EngineeringAttributeHead">
+				<div class="atrributeName">属性名称</div>
+				<div class="atrributeValue">属性值</div>
+			</div>
+			<table id='id_projectinfomation_accordion_basicinfo' style="width:100%;height:100%;" class="easyui-datagrid" data-options="fit:true">
+				
+			</table>
+		</div>
+		<div title="技术参数"  data-options="tools:'#id_projectinfomation_accordion_tool2'">
+			<div class="EngineeringAttributeHead">
+				<div class="atrributeName">属性名称</div>
+				<div class="atrributeValue">属性值</div>
+			</div>
+			<table id='id_projectinfomation_accordion_techparams' style="width:100%;height:100%;" class="easyui-datagrid" data-options="fit:true">
+			
+			</table>
+		</div>
+		<div title="模型属性">
+			<div class="EngineeringAttributeHead">
+				<div class="atrributeName">属性名称</div>
+				<div class="atrributeValue">属性值</div>
+			</div>
+			<table id='id_projectinfomation_accordion_modelproperty' style="width:100%;height:100%;" class="easyui-datagrid" data-options="fit:true">
+				
+			</table>
+		</div>
+
+
+	</div>
+	<!--工程信息  end-->	
+</div>	
+
+	
+
+								
+		
+		
+
+<div id="id_projectinfomation_accordion_tool1">
+	<a id="id_projectinfomation_accordion_tool1_cancel" href="#" class="icon-cancel" ></a>
+	<a id="id_projectinfomation_accordion_tool1_save" href="#" class="icon-save" ></a>
+	<a id="id_projectinfomation_accordion_tool1_edit" href="#" class="icon-edit" ></a>
+</div>
+<div id="id_projectinfomation_accordion_tool2">
+	<a href="#" class="icon-cancel" onclick=""></a>
+	<a href="#" class="icon-save" onclick=""></a>
+	<a href="#" class="icon-edit" onclick=""></a>
+</div>
+
+			
+<script type="text/javascript">
+	
+$("#id_projectinfomation_accordion_basicinfo").datagrid({
+	fit:true
+});
+
+$("#id_projectinfomation_accordion_basicinfo").datagrid({
+	singleSelect:true,
+	columns:[[    
+        {field:'id',title:'id',width:100,hidden:true},    
+        {field:'name',title:'属性名称',align:'center'},    
+        {field:'value',title:'属性值',align:'center',editor:{type:'textbox'}}    
+    ]],
+	data:[
+		{id:1,name:"图号1",value:"ISO101"},
+		{id:2,name:"图号2",value:"ISO101"},
+		{id:3,name:"图号3",value:"ISO101"},
+		{id:4,name:"图号4",value:"ISO101"},
+		{id:5,name:"图名5",value:"一气化三清101"}
+
+	],
+	onDblClickRow:function(rowIndex, rowData){
+		$(this).datagrid('selectRow', rowIndex).datagrid("beginEdit",rowIndex);
+
+	}
+});
+$("#id_projectinfomation_accordion_techparams").datagrid({
+	columns:[[    
+        {field:'id',title:'id',width:100,hidden:true},    
+        {field:'name',title:'Name',width:100,align:'center'},    
+        {field:'value',title:'value',width:100,align:'center'}    
+    ]],
+	data:[
+		{id:1,name:"图号",value:"ISO101"},
+		{id:2,name:"图名",value:"一气化三清101"}
+
+	]
+});
+$("#id_projectinfomation_accordion_modelproperty").datagrid({
+	columns:[[    
+        {field:'id',title:'id',width:100,hidden:true},    
+        {field:'name',title:'Name',width:100,align:'center'},    
+        {field:'value',title:'value',width:100,align:'center'}    
+    ]],
+	data:[
+		{id:1,name:"图号",value:"ISO101"},
+		{id:2,name:"图名",value:"一气化三清101"}
+
+	]
+});
+
+
+//【取消按钮】点击事件
+$("#id_projectinfomation_accordion_tool1_cancel").click(function(e){
+	$("#id_projectinfomation_accordion_basicinfo").datagrid("rejectChanges");
+
+});
+//【保存按钮】点击事件
+$("#id_projectinfomation_accordion_tool1_save").click(function(e){
+	$("#id_projectinfomation_accordion_basicinfo").datagrid("acceptChanges");
+
+});
+//【编辑按钮】点击事件
+$("#id_projectinfomation_accordion_tool1_edit").click(function(e){
+	var rows = $("#id_projectinfomation_accordion_basicinfo").datagrid("getRows");
+	for(var i=0;i<rows.length;i++){
+		$("#id_projectinfomation_accordion_basicinfo").datagrid("beginEdit",i);
+	}
+	
+});
+
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+@charset "utf-8";
+/** 工具箱 总布局 默认样式 **/
+.pid-toolbar{
+	position:absolute;
+	/*
+	z-index:99;
+	border:1px solid #FAAA3C;
+	background-color:#FAAA3C; 
+	padding:2px;
+	*/
+}
+
+/** 工具箱头  start **/
+.pid-toolbar-head{
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	border: 1px solid #ffffff;
+	position: relative ;
+	background: rgba(243, 241, 242, 0.90);
+	text-align: center;display: block;
+}
+/** bag的圆形背景 **/
+.pid-toolbar-head:hover {
+	cursor: pointer;
+}
+.bag-close {
+	position: relative;
+	display: inline-block;
+	background-image: url(../images/bag-black.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+	top: 4px;
+}
+.bag-open {
+	position: relative;
+	display: inline-block;
+	background: url(../images/bag-blue.png) no-repeat center center;
+	background-size: contain;
+	width: 20px;
+	height: 20px;
+	top: 4px;
+}
+
+/** 工具箱头  end  **/
+
+
+
+
+
+/****新基础功能入口样式---start****/
+.pid-toolbar-container {
+	display:block;
+	background: rgba(243, 241, 242, 0.90);
+	border-radius: 40px;
+	position: relative;
+	overflow: hidden;
+	font-size: 12px;
+	padding-right: 9px;
+	border: 2px solid #fff;
+}
+.pid-toolbar-item {
+	display: table-cell;
+	vertical-align: middle;
+	height: 100%;
+	margin-left: 1px;
+}
+
+.pid-toolbar-btn {
+	margin: 1px auto;
+	display: inline-block;
+	text-align: center;
+	position: relative;
+}
+
+.pid-toolbar-icon {
+	display: inline-block;
+	position: relative;
+	width: 18px;
+	height: 18px;
+}
+
+/******功能按钮图片--start**********/
+/** 复原  关闭**/
+.recover-close{
+    background: url(../images/recover-black.png) no-repeat center center;
+}
+/** 复原  开启**/
+.recover-open{
+    background: url(../images/recover-blue.png) no-repeat center center;
+}
+/** 小手  关闭**/
+.hand-close{
+    background: url(../images/hand-black-more.png) no-repeat center center;
+}
+/** 小手  开启**/
+.hand-open{
+    background: url(../images/hand-blue.png) no-repeat center center;
+}
+/** 隐藏模块  关闭**/
+.hidemodel-close{
+    background: url(../images/hide-black.png) no-repeat center center;
+}
+/** 隐藏模块  开启**/
+.hidemodel-open{
+    background: url(../images/hide-blue.png) no-repeat center center;
+}
+/** 隐藏其他模块  关闭**/
+.hideothers-close{
+    background: url(../images/hideothers-black.png) no-repeat center center;
+}
+/** 隐藏其他模块  开启**/
+.hideothers-open{
+    background: url(../images/hideothers-blue.png) no-repeat center center;
+}
+/** 变色  关闭**/
+.changecolor-close{
+    background: url(../images/changecolor-black.png) no-repeat center center;
+}
+/** 变色  开启**/
+.changecolor-open{
+    background: url(../images/changecolor-blue.png) no-repeat center center;
+}
+/** 截图  关闭**/
+.cut-close{
+    background: url(../images/cut-black.png) no-repeat center center;
+}
+/** 截图  开启**/
+.cut-open{
+    background: url(../images/cut-blue.png) no-repeat center center;
+}
+/** 云线  关闭**/
+.cloud-close{
+    background: url(../images/cloud-black.png) no-repeat center center;
+}
+/** 云线  开启**/
+.cloud-open{
+    background: url(../images/cloud-blue.png) no-repeat center center;
+}
+/** 批注  关闭**/
+.note-close{
+    background: url(../images/note-text-black.png) no-repeat center center;
+}
+/** 批注  开启**/
+.note-open{
+    background: url(../images/note-text-blue.png) no-repeat center center;
+}
+/** 划线  关闭**/
+.line-close{
+    background: url(../images/line-black.png) no-repeat center center;
+}
+/** 划线  开启**/
+.line-open{
+    background: url(../images/line-blue.png) no-repeat center center;
+}
+/******功能按钮图片--end**********/
+
+/****新基础功能入口样式---end****/
+
+/**************************************水平样式 总布局自定义样式**********************************/
+/**********************************只需要在.pid-toolbar追加.pid-toolbar-horizontal样式即可****************/
+.pid-toolbar-horizontal{
+	height:32px;
+}
+/**head 的水平样式*/
+.pid-toolbar-horizontal > .pid-toolbar-head{
+	 float:left;
+	
+}
+/**container的水平样式*/
+.pid-toolbar-horizontal > .pid-toolbar-container{
+	float:left;
+	/**距离head的距离*/
+	margin-left:4px;
+	height: 28px;
+}
+/**水平样式中按钮的间距*/
+.pid-toolbar-horizontal .pid-toolbar-btn{
+	padding: 0 7px;
+}
+
+
+
+/***************************************垂直样式 总布局自定义样式**********************************/
+/**********************************只需要在.pid-toolbar追加.pid-toolbar-vertical 样式即可******************/
+.pid-toolbar-vertical{
+	width:32px;
+}
+/**head 的垂直样式*/
+.pid-toolbar-vertical > .pid-toolbar-head{
+	
+}
+/**container的垂直样式*/
+.pid-toolbar-vertical > .pid-toolbar-container{
+	margin-top:4px;
+	width: 25px;
+	border-radius: 20px;
+	padding: 10px 1px;
+}
+
+.pid-toolbar-vertical .pid-toolbar-item {
+	float: left;
+	position: relative;
+	width: 100%;
+	left: -17px;
+}
+/**垂直样式中按钮的间距*/
+.pid-toolbar-vertical .pid-toolbar-btn {
+	padding: 3px 8px;
+}

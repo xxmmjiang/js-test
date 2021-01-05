@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		  <link rel="stylesheet" href="myButton.css">
+		  <script src="../../jquery.min.js"></script>
+		  <style>
+			
+		  </style>
+	</head>
+	<body >
+	
+	<div id="root" style="position: relative; height:700px;width: 1000px;background-color:red;">
+
+		<div id="viewer" style="width: 100%; height: 100%; overflow: hidden; position: absolute;">
+			<div id="canvas" style="position: absolute; left: 0px; top: 0px; bottom: 0px; right: 0px;">
+				<div id="container" style="position: absolute; transform: scale(1);">
+					<img  id='img'  src="./image/1.jpg" style="position: absolute;width: auto; height: auto; display: block;"/>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	</body>
+	<script>
+		$('#img').on('load',function(){
+			//图片宽、高
+			var imgWidth = $(this).width();
+			var imgHeight = $(this).height();
+			console.log(imgWidth+'--'+imgHeight);
+			// 外部区域的宽高
+			var outerWidth = $('#root').width();
+			var outerHeight = $('#root').height();
+			
+			console.log(outerWidth+'--'+outerHeight);
+		
+			// 计算后居中的位置
+			var left = (outerWidth-imgWidth)/2;
+			var top = (outerHeight-imgHeight)/2;
+			
+			$('#container').css({
+				top : top+'px',
+				left : left+'px'
+				
+			});
+			
+		});
+	</script>
+</html>

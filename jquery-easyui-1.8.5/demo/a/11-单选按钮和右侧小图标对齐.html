@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		  <link rel="stylesheet" href="myButton.css">
+		  <script src="../../jquery.min.js"></script>
+		  <style>
+			
+		  </style>
+	</head>
+	<body >
+	<div  style="position:absolute;z-index: 90;top: 10px;left: 40px; width: 100px;height: 50px;border:green solid 1px;padding:40px;">
+		<table>
+			<tr>
+			<td><input id="id_hotspot_flag" type="radio" style="margin-right: 5px;border:green solid 1px;" ></td>
+			<td><img src="./image/hotspot.png" title="热点图纸" style="width: 30px;height: 30px;border:green solid 1px;"/></td>
+			</tr>
+        </table>
+
+        
+
+
+    </div>
+	
+
+	</body>
+	<script>
+	var openHotspot = false;
+		  //单选按钮绑定事件
+        $("#id_hotspot_flag").click(function(){
+             openHotspot = !openHotspot;
+            if(openHotspot){//开启热点
+               alert("开启"); 
+			   //$(this).attr("checked",true); 
+            }else{ //关闭热点
+				alert("关闭"); 
+				$(this).attr("checked",false); 
+            }
+        });
+	</script>
+</html>

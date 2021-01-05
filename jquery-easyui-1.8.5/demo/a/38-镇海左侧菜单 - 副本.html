@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+ <script src="./jquery.min.js"></script>
+<style>
+.pid-navigation-menu {
+	position: relative;
+	background-color:#EAF2EB;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+.pid-navigation-menu .pid-nav-menu-item {
+	position: relative;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	cursor: pointer;
+	height: 60px;
+	text-align: center;
+	margin-left: 1px;
+}
+
+.pid-navigation-menu .pid-nav-isClicked{
+	background-color: #fff;
+	/*蓝色*/
+	border-left: 3px solid #1FA7DD;
+}
+.pid-navigation-menu .pid-nav-menu-item > .pid-menu-btn {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.pid-navigation-menu .pid-nav-menu-item > .pid-menu-btn:hover {
+	background-color: #F5F9F6;
+}
+
+.pid-nav-menu-icon {
+	position: absolute;
+	top:36%;
+	left:50%;
+	-ms-transform:translate(-50%,-50%);
+	-moz-transform:translate(-50%,-50%);
+	-o-transform:translate(-50%,-50%);
+	-webkit-transform:translate(-50%,-50%);
+	transform:translate(-50%,-50%);
+	width: 20px;
+	height: 20px;
+}
+.pid-nav-menu-text {
+	position: absolute;
+    top: 54%;
+    width: 100%;
+    text-align: center;
+    color: #525C57;
+    
+}
+.pid-nav-isClicked .pid-nav-menu-icon {
+	margin-left: -3px;
+}
+.pid-nav-isClicked .pid-nav-menu-text {
+	margin-left: -3px;
+}
+
+/**底部功能区域布局**/
+.pid-menu-bottom {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+}
+
+
+		
+
+/**图片**/	
+.searcher-manager-btn{
+	background: url("./img3/icon-search.png") no-repeat center center;
+}
+.view-blind{
+	background: url("./img3/icon-view3D.png") no-repeat center center;
+}	
+.view-PID{
+	background: url("./img3/icon-viewPid.png") no-repeat center center;
+}	
+.view-document{
+	background: url("./img3/icon-viewDocument.png") no-repeat center center;
+}	
+.functionList{
+	background: url("./img3/icon-functionList.png") no-repeat center center;
+}	
+.switchSystem{
+	background: url("./img3/switch_system.png") no-repeat center center;
+}
+.A{
+	background: url("./img3/A-admin.png") no-repeat center center;
+}
+		
+</style>
+</head>
+<body style="margin:50px;">
+	
+	<div style="width:70px;height:700px;border:">
+		
+		
+		
+		<div class="pid-navigation-menu">
+			
+			<!-- top -->
+			<div class="menu-top">
+				<div>
+					<div class="pid-nav-menu-item" >
+						<a title="搜索" href="javascript:void(0)" id="id_pid_page_search" name="搜索" class="pid-menu-btn pid-menu-isSingle">
+							<div class="pid-nav-menu-icon searcher-manager-btn"></div>
+							<div class="pid-nav-menu-text">搜索</div>
+						</a>
+					</div>
+					
+					<div class="pid-nav-menu-item"  >
+						<a title="智能P&amp;ID" href="javascript:void(0)" id="id_pid_page_pid" name="智能P&amp;ID" class="pid-menu-btn  pid-nav-isClicked">
+							<div class="pid-nav-menu-icon view-PID"></div>
+							<div class="pid-nav-menu-text">智能P&amp;ID</div>
+						</a>
+					</div>
+					<div class="pid-nav-menu-item"  >
+						<a title="盲板" href="javascript:void(0)" id="id_pid_page_blind" name="盲板" class="pid-menu-btn">
+							<div class="pid-nav-menu-icon view-blind"></div>
+							<div class="pid-nav-menu-text">盲板</div>
+						</a>
+					</div>
+					
+					<div class="pid-nav-menu-item"  >
+						<a title="应用列表" href="javascript:void(0)" id="id_pid_page_functionlist" name="应用列表" class="pid-menu-btn  pid-menu-isSingle">
+							<div class="pid-nav-menu-icon functionList"></div>
+							<div class="pid-nav-menu-text">应用列表</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- top -->
+			
+			<!-- bottom -->
+			<div class="pid-menu-bottom">
+				<div>
+					<div class="pid-nav-menu-item"  >
+						<a title="系统切换" href="javascript:void(0)" id="id_pid_page_system" name="系统切换" class="pid-menu-btn  pid-menu-isSingle">
+							<div class="pid-nav-menu-icon switchSystem"></div>
+							<div class="pid-nav-menu-text">系统切换</div>
+						</a>
+					</div>
+					<div class="pid-nav-menu-item" >
+						<a title="admin" href="javascript:void(0)" id="id_pid_page_user" name="admin" class="pid-menu-btn  pid-menu-isSingle">
+							<div class="pid-nav-menu-icon A"></div>
+							<div class="pid-nav-menu-text">admin</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- bottom -->
+			
+		</div>
+		
+		
+		
+	</div>
+
+</body>
+<script>
+	$(".pid-menu-btn").click(function(){
+	
+		var isClicked = $(this).hasClass("pid-nav-isClicked");
+		if(isClicked){
+			return;
+		}
+	
+		var isSingle = $(this).hasClass("pid-menu-isSingle");
+		if(isSingle){
+			$(this).addClass("pid-nav-isClicked");
+			return;
+		}
+		//将除了自己以外的其他选中状态全部取消
+		$(".pid-menu-btn").removeClass("pid-nav-isClicked");
+		//自己添加选中样式
+		$(this).addClass("pid-nav-isClicked");
+		
+	})
+</script>
+</html>

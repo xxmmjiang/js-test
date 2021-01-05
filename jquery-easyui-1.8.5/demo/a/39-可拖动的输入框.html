@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Accordion Tools - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	<style>
+	.content{
+		position:absolute ;
+		 text-align:left;
+		 border:1px solid #F5B8A3;
+		 padding:1px;
+		 display:inline-block;
+		*display:inline;
+		*zoom:1;
+
+	}
+	.mytextarea{
+		font-family:'楷体','宋体',arial,georgia,verdana,helvetica,sans-serif;
+		font-size:14px;
+		border:0;
+		width:100px;
+		height:40px;
+	}
+	</style>
+</head>
+<body>
+
+
+自动向下廷伸的文本框：
+<br /><br />
+
+<div id="outer" style="width:400px;height:300px;border:1px solid green;">
+		
+		
+		
+		<div class="content" >
+			<textarea  class="mytextarea" rows="2" cols="40" ></textarea>
+			
+		</div>
+</div>
+
+
+<script>
+$("#outer").click(function(event){
+	//var x = event.offsetX;
+	//var y = event.offsetY;
+	var x = event.pageX - 50;
+	var y = event.pageY-20;
+	console.log(x+"---"+y);
+	
+	$(".content").css({"top":y+"px","left":x+"px"});
+});
+
+$(".content").click(function(event){
+	//禁止冒泡
+	return false;
+});
+</script>
+</body>
+</html>

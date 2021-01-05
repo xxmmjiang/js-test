@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tabs Tools - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	
+
+</head>
+<body>
+<a id="aa" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="untrigger()">解除aa事件</a> 
+<a id="bb" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="mytrigger()">触发aa事件</a> 
+<a id="bb" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="mybind()">重新绑定aa事件</a> 
+<div id="cc" style="margin-top:50px;width:300px;height:200px;background-color:green;text-align:center;font-size:20px;padding:10px;">
+	你可以尝试：鼠标在区域内滑动
+	<span></span>
+</div>
+	
+<script type="text/javascript">
+
+
+
+function mytrigger(){
+
+	$("#aa").trigger("mychange");
+}
+
+function untrigger(){
+	$("#aa").unbind("mychange");
+}
+
+function mybind(){
+	/*
+	按钮的自定义事件
+	*/
+	$("#aa").bind("mychange",function(e){
+
+		$(this).linkbutton({
+			iconCls:'icon-ok'
+		});
+	})
+}
+
+//div区域的自定义事件
+$("#cc").bind("changeColor",function(ev,e){
+	var color = "#"+e.pageX+e.pageY;
+	console.log(color);
+	$("#cc").css({"background-color":color});
+})
+
+$("#cc").mousemove(function(e){
+	$("#cc span").text(e.pageX + ", " + e.pageY);
+	$("#cc").trigger("changeColor",e);
+});
+
+ //$("#log").text("e.pageX: " + e.pageX + ", e.pageY: " + e.pageY);
+
+
+</script>		
+
+</body>
+
+</html>

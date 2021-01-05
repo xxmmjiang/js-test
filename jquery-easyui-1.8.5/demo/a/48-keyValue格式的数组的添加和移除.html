@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Accordion Tools - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	<style>
+
+
+	</style>
+</head>
+<body style="margin:100px;padding:100px;">
+<div style="width:500px;height:100px;">
+
+</div>
+
+<script>
+		var a = [{"aaa":"b"},{"c":""},{"dd":"f"}];
+		console.log(a);
+		//这案例非常神奇，执行下面的删除后，上面的日志居然也改变了。太逗了
+		a.splice(0,1)
+		console.log(a);
+</script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		  <script src="../../jquery.min.js"></script>
+		  <style>
+				ul li {
+					cursor:pointer;
+				}
+		  </style>
+	</head>
+	<body >
+	<div>
+	<ul>
+		<li>1.jpg</li>
+		<li>2.jpg</li>
+		<li>3.jpg</li>
+		<li>4.png</li>
+		<li>5.png</li>
+		<li>6.png</li>
+		
+	</ul>
+	<div>
+	<div id="a" style="width:700px;height:600px;border:1px solid green;position:absolute;left:200px;">
+			<div id="id_document_img_root" style="position: relative; height: 100%;width: 100%;">
+
+				<div class="id_document_img-viewer-container" style="width: 100%; height: 100%; overflow: hidden; position: absolute;">
+					<div class="id_document_img-viewer-canvas" style="position: absolute; ">
+						<div id="id_document_img_container" style="position: absolute; transform: scale(1);">
+							<img  id='id_document_img_img'   style="position: absolute;width: auto; height: auto; display: block;"/>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+	
+	</div>
+	
+
+	
+
+	</body>
+	<script>
+
+$("li").each(function(e){
+	var t = $(this).text();
+	$(this).click(function(){
+		//alert(t);
+		ImageViewer("./image/"+t,"a",function(){
+	
+		});
+	});
+	
+	
+});
+
+
+/*********************下面是控件代码*********************************/
+
+/*
+ * 	当鼠标按住时，需要实现图纸随之鼠标移动
+ * 	这个属性记录当前是否属于图纸拖动状态
+ */
+var svg_distinguish_isDrag = false;//是否开始拖动图纸  【false 不拖拽】
+// 拖动图纸专用变量 ，拖动图纸时的点的坐标
+var svg_distinguish_disX,svg_distinguish_disY;//图片相对于图片的位置
+/**
+ * 包裹图片的各类id
+ * @type {null}
+ */
+var imageId4Root = null;
+var imageId4Container = null;
+var imageId4Img = null;
+
+
+/**
+ * @note 是否初始化过一次
+ * @description 针对只需要初始化一次的功能，这个参数很重要，故是全局参数
+ * @type {boolean}
+ */
+var initialized = false;
+
+//这里是写死的，因为没必要是动态的
+var rootId = "id_document_img"
+/**
+ * DwgViewer
+ *
+ * @param {object} 图片渲染的实体
+ * @constructor
+ */
+function ImageViewer(url,elementId,callback) {
+    this.url = url;
+	
+	//获取外框的尺寸
+    var width4Panel = $("#"+elementId).width();
+    var height4Panel = $("#"+elementId).height();
+	
+	// 外框边界的坐标，获取页面某一元素的绝对X,Y坐标
+	var minx = $('#'+elementId).offset().left; 
+	var miny = $('#'+elementId).offset().top;
+	//alert(minx+"--"+miny);
+    var maxx = minx+width4Panel;
+	var maxy = miny+height4Panel;
+	
+	//必须预留出一片空白区域，不然拖动的状态(svg_distinguish_isDrag)无法监听到了
+	var blankScope = 50;
+	minx = minx+blankScope;
+	miny = miny+blankScope;
+	maxx = maxx-blankScope;
+	maxy = maxy-blankScope;
+	
+	//alert(maxx+"--"+maxy);
+    //追加html.只初始化一次
+ 
+    imageId4Root = rootId+"_root";
+    imageId4Container = rootId+"_container";
+    imageId4Img = rootId+"_img";
+
+
+    //console.log(width4Panel+"---"+height4Panel);
+	if(!initialized){
+		//图片加载后，自动居中
+		$('#'+imageId4Img).on("load",function () {
+		
+			
+
+			var imgWidth = $('#'+imageId4Img).width();
+			var imgHeight = $('#'+imageId4Img).height();
+			var centerTop = (height4Panel-imgHeight)/2;
+			var centerLeft = (width4Panel-imgWidth)/2;
+			$("#"+imageId4Img).css({
+				top:centerTop,
+				left:centerLeft
+			});
+			console.log(centerLeft+"--"+centerTop);
+			//回调
+			callback();
+		});
+	
+	}
+    
+    $('#'+imageId4Img).attr("src",url);
+	
+	if(!initialized){
+		/*
+		 * 绑定滚轮和右击事件
+		 */
+		var imgRoot = document.getElementById(imageId4Root);
+		var image_container = document.getElementById(imageId4Container);
+		if(document.addEventListener){
+			//js添加鼠标滚轮监听事件
+			imgRoot.addEventListener('DOMMouseScroll',img_scrollFunc,false);
+			//鼠标右击
+			imgRoot.addEventListener('contextmenu',svg_distinguish_contextmenuFunc);
+
+		}
+		imgRoot.onmousewheel = img_scrollFunc;
+
+		//初始化移动事件
+		init_img_moveFunc(imgRoot,image_container,{minx:minx,miny:miny,maxx:maxx,maxy:maxy});
+
+		
+    
+		/**
+		 * 空格绑定P&ID图纸复位功能
+		 */
+        $(document).keydown(function(e) {
+            if (e.which === 32) {
+                this.zoomExtents();
+            }
+        });
+        initialized = true;
+    }else{
+		// 将移动后的复位
+		var image_container = document.getElementById(imageId4Container);
+		$(image_container).css({top:0,left:0});
+		// 缩放复位
+		image_container.style.transform = "scale(1)";
+	}
+
+}
+
+/**
+ * @note 复位功能（没想好咋实现？？？）
+ */
+ImageViewer.prototype.zoomExtents = function() {
+
+}
+
+/**
+ * 绑定鼠标移动事件
+ * @param event
+ */
+function init_img_moveFunc(imgRoot,image_container,borderPosition) {
+
+    //鼠标按下时
+    image_container.onmousedown = function(e){
+        
+		//鼠标小手样式
+        this.style.cursor = 'pointer';//move
+		// $("#test").css("cursor","url(./quantou.cur),auto");
+        e = e||window.event;//兼容性写法
+        e.preventDefault();
+		
+		svg_distinguish_isDrag = true;
+        //鼠标位置
+        var x = e.clientX;
+        var y = e.clientY;
+        //鼠标相对于图片的位置
+        svg_distinguish_disX = x-this.offsetLeft;
+        svg_distinguish_disY = y-this.offsetTop;
+    }
+    //鼠标移动时
+    imgRoot.onmousemove = function(e){
+        e = e || window.event;//兼容性写法
+        e.preventDefault();
+        //鼠标位置
+        var x = e.clientX;
+        var y = e.clientY;
+		//console.log('x:'+x+',y:'+y);
+        if(svg_distinguish_isDrag){
+			if(x<= borderPosition.minx){
+				svg_distinguish_isDrag = false;
+				return;
+			}
+			
+			if(x>=borderPosition.maxx){
+				svg_distinguish_isDrag = false;
+				return;
+			}
+			if(y<=borderPosition.miny){
+				svg_distinguish_isDrag = false;
+				return;
+			}
+			if(y>=borderPosition.maxy){
+				svg_distinguish_isDrag = false;
+				return;
+			}
+			//修改图片位置
+			image_container.style.left = x - svg_distinguish_disX + 'px';
+			image_container.style.top = y - svg_distinguish_disY + 'px';
+		
+        }
+    }
+
+    //鼠标抬起时
+    imgRoot.onmouseup = function(e) {
+        e = e||window.event;//兼容性写法
+        e.preventDefault();
+       //鼠标小手样式
+        image_container.style.cursor = 'default';
+		svg_distinguish_isDrag = false;
+    }
+
+}
+
+/**
+ * 绑定滚轮事件
+ */
+function img_scrollFunc(event){
+    event = event ||window.event;//兼容性写法
+    event.preventDefault();
+
+    var image_container = document.getElementById(imageId4Container);
+    var endIndex = image_container.style.transform.length - 1;
+    var currentScale = image_container.style.transform.slice(6, endIndex);
+    currentScale = Number(currentScale);
+
+
+    var x = event.clientX;
+    var y = event.clientY;
+    //鼠标相对于图片的位置
+    var disX = x-image_container.offsetLeft;
+    var disY = y-image_container.offsetTop;
+
+    var	_scale = null;
+
+    if(event.wheelDeltaY > 0){
+        // 滚轮上滚放大
+        _scale = currentScale + 0.01;
+    }else{
+        // 滚轮下滚缩小
+        _scale = currentScale - 0.01;
+    }
+    _scale = _scale.toFixed(2);
+
+    if(_scale - 0.1 <= 0){
+        return false
+    }
+    var prop = _scale / currentScale;
+
+    var currentLeft = x - disX*prop;
+    var	currentTop = y - disY*prop;
+
+    image_container.style.transform = "scale("+ _scale +")";
+
+    $("#"+imageId4Container).css('left', currentLeft).css('top', currentTop);
+}
+/**
+ * 右击事件
+ * @param event
+ * @returns
+ */
+function svg_distinguish_contextmenuFunc(event){
+    event = event ||window.event;//兼容性写法
+    event.preventDefault();
+    console.log("left: "+event.pageX+";"+"top:  "+event.pageY);
+    // $('#id_result4Relation_pipelines_menu').menu('show', {
+    //     left: event.pageX + "px",
+    //     top:  event.pageY + "px"
+    // });
+
+}
+function showErrorMessage(msg) {
+    alert(msg);
+}
+
+
+	
+	</script>
+</html>

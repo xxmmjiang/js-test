@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+	<link rel="stylesheet" type="text/css" href="css/pid-toolbar.css" >
+ <script src="./jquery.min.js"></script>
+	<style>
+   
+		
+		/******folder-area*********/
+		.folder-area{
+			position:absolute; 
+			background-color:red; 
+		}
+		
+		/**********folder-area-icon*****************/
+		.folder-area-icon{
+			position:absolute;
+			width: 37px;
+			height: 37px;
+			cursor: pointer;
+		}
+
+
+		
+		
+		/*****icon-img-left*****/
+		.left-default{
+			background: url(./images/left-default.png) no-repeat center center;
+		}
+		.left-mousedown{
+			background: url(./images/left-mousedown.png) no-repeat center center;
+		}
+		.left-mouseover{
+			background: url(./images/left-mouseover.png) no-repeat center center;
+		}
+		
+		/*****icon-img-right*****/
+		.right-default{
+			background: url(./images/right-default.png) no-repeat center center;
+		}
+		.right-mousedown{
+			background: url(./images/right-mousedown.png) no-repeat center center;
+		}
+		.right-mouseover{
+			background: url(./images/right-mouseover.png) no-repeat center center;
+		}
+		
+		/*****icon-img-down*****/
+		.down-default{
+			background: url(./images/down-default.png) no-repeat center center;
+		}
+		.down-mousedown{
+			background: url(./images/down-mousedown.png) no-repeat center center;
+		}
+		.down-mouseover{
+			background: url(./images/down-mouseover.png) no-repeat center center;
+		}
+		
+		/*****icon-img-up*****/
+		.up-default{
+			background: url(./images/up-default.png) no-repeat center center;
+		}
+		.up-mousedown{
+			background: url(./images/up-mousedown.png) no-repeat center center;
+		}
+		.up-mouseover{
+			background: url(./images/up-mouseover.png) no-repeat center center;
+		}
+		
+	
+		/******up*******/
+		.folder-area-up{
+			left:0; 
+			top:0;
+			width:100%; 
+			height:200px
+		}
+		.folder-area-icon-up{
+			right:37px;
+			bottom:-18px;
+		}
+		
+		/******down*******/
+		.folder-area-down{
+			left:0; 
+			bottom:0;
+			width:100%; 
+			height:200px
+		}
+		.folder-area-icon-down{
+			right:37px;
+			top:-18px;
+		}
+		
+		/******left*******/
+		.folder-area-left{
+			left:0; 
+			top:0;
+			width:200px; 
+			height:100%
+		}
+		.folder-area-icon-left{
+			top:37px;
+			right:-18px;
+		}
+		
+		/******right*******/
+		.folder-area-right{
+			right:0; 
+			top:0;
+			width:200px; 
+			height:100%
+		}
+		.folder-area-icon-right{
+			top:37px;
+			left:-18px;
+		}
+    </style>
+</head>
+<body style="margin:50px;">
+
+
+
+
+	<div id="demo" style="z-index:99;position:relative; color:#000;width:800px; height:400px;background:gray;"> 
+	我在底层,代表最外层div，是用户提供的div
+	
+	
+		<div id="id_folderarea" class="folder-area " style="">
+			
+			<!-- 内容 -->
+			<div id="id_folderarea_content" style="position:absolute;background-color:yellow; width:100%;height:100%; margin:0; " >
+			
+				<div style=" ">
+					<table>
+						<tr>
+							<td>我在中间层的区域文字我在中间层的区域文字我在中间层的区域文字我在中间层的区域文字我在中间层的区域文字我在中间层的区域文字</td>
+						</tr>
+						<tr>
+							<td>我在中间层的区域文字</td>
+						</tr>
+						<tr>
+							<td>我在中间层的区域文字</td>
+						</tr>
+						<tr>
+							<td>我在中间层的区域文字</td>
+						</tr>
+						<tr>
+							<td>我在中间层的区域文字</td>
+						</tr>
+						<tr>
+							<td>我在中间层的区域文字</td>
+						</tr>
+					</table>
+				
+				</div>
+				
+			</div>	
+			
+			
+			<!--- 按钮，布局核心逻辑：外层div是position:relative，内部图片div是position:absolute;-->
+			<div style="position:absolute;width:100%;height:100%;">
+			
+				<div id="id_folderarea_btn" class="folder-area-icon " style="" ></div>
+				
+			</div>	
+		</div> 
+		
+		
+		
+	</div> 
+</body>
+<script>
+	var a = {name:"jiang"};
+	var b = a;
+	a.code="xuxu";
+	alert(b.code);
+	//folderArea("id_folderarea","up");
+	//folderArea("id_folderarea","down");
+	//folderArea("id_folderarea","left");
+	folderArea("id_folderarea","right");
+	
+	
+	/**
+	* @param direction[up/down/left/right]
+	*/
+	function folderArea(id,direction){
+		if("up"==direction){	
+			initByUp(id);
+		}else if("down"==direction){
+			initByDown(id);
+		}else if("left"==direction){
+			initByLeft(id);
+		}else{
+			initByRight(id);
+		}
+	}
+	
+	
+	
+	function initByRight(id){
+
+		var outer = $("#"+id);
+		var content = $("#"+id+"_content");
+		var btn = $("#"+id+"_btn");
+		
+		//添加class
+		outer.addClass("folder-area-right");
+		btn.addClass("folder-area-icon-right").addClass("right-default");
+		
+		
+		btn.mousedown(function(){
+			
+			// 样式
+			if(outer.width()<80){
+				$(this).removeClass("left-default").removeClass("left-mouseover").addClass("left-mousedown");
+
+			}else{
+				$(this).removeClass("right-default").removeClass("right-mouseover").addClass("right-mousedown");
+
+			}
+			
+		});
+		btn.mouseup(function(){
+			
+			// 样式
+			if(outer.width()<80){
+				// 从右到左收缩 的事件
+				outer.width(200);
+				//内容区域
+				content.show();
+			}else{
+				// 从左到右收缩 的事件
+				outer.width(10);
+				//内容区域
+				content.hide();
+				
+				
+			}
+			
+			
+			
+			
+		});
+		btn.mouseover(function(){
+			
+			// 样式
+			if(outer.width()<80){
+				$(this).removeClass("left-default").removeClass("left-mousedown").addClass("left-mouseover");
+
+
+			}else{
+				$(this).removeClass("right-default").removeClass("right-mousedown").addClass("right-mouseover");
+
+			}
+			
+		});
+		btn.mouseout(function(){
+			
+			// 样式
+			if(outer.width()<80){
+				$(this).removeClass("left-mouseover").removeClass("left-mousedown").removeClass("right-mouseover").removeClass("right-mousedown").addClass("left-default");
+
+			}else{
+				$(this).removeClass("left-mouseover").removeClass("left-mousedown").removeClass("right-mouseover").removeClass("right-mousedown").addClass("right-default");
+
+			}
+		});
+		
+	
+	}
+	
+	
+	
+	
+	
+	//初始化位于【左】的folderArea
+	function initByLeft(id){
+
+		var outer = $("#"+id);
+		var content = $("#"+id+"_content");
+		var btn = $("#"+id+"_btn");
+		
+		//添加class
+		outer.addClass("folder-area-left");
+		btn.addClass("folder-area-icon-left").addClass("left-default");
+		
+		
+		btn.mousedown(function(){
+			
+			// 样式
+			if(outer.width()<80){
+				$(this).removeClass("right-default").removeClass("right-mouseover").addClass("right-mousedown");
+			}else{
+				
+				$(this).removeClass("left-default").removeClass("left-mouseover").addClass("left-mousedown");
+			}
+			
+		});
+		btn.mouseup(function(){
+			
+			// 样式
+			if(outer.width()<80){
+				// 从右到左收缩 的事件
+				outer.width(200);
+				//内容区域
+				content.show();
+			}else{
+				// 从左到右收缩 的事件
+				outer.width(10);
+				//内容区域
+				content.hide();
+				
+				
+			}
+			
+			
+			
+			
+		});
+		btn.mouseover(function(){
+			
+			// 样式
+			if(outer.width()<80){
+				$(this).removeClass("right-default").removeClass("right-mousedown").addClass("right-mouseover");
+
+			}else{
+				$(this).removeClass("left-default").removeClass("left-mousedown").addClass("left-mouseover");
+
+			}
+			
+		});
+		btn.mouseout(function(){
+			
+			// 样式
+			if(outer.width()<80){
+				$(this).removeClass("left-mouseover").removeClass("left-mousedown").removeClass("right-mouseover").removeClass("right-mousedown").addClass("right-default");
+
+			}else{
+				$(this).removeClass("left-mouseover").removeClass("left-mousedown").removeClass("right-mouseover").removeClass("right-mousedown").addClass("left-default");
+
+			}
+		});
+		
+	
+	}
+	
+	
+	
+	
+	
+	//初始化位于【下】的folderArea
+	function initByDown(id){
+
+		var outer = $("#"+id);
+		var content = $("#"+id+"_content");
+		var btn = $("#"+id+"_btn");
+		
+		//添加class
+		outer.addClass("folder-area-down");
+		btn.addClass("folder-area-icon-down").addClass("down-default");
+		
+		
+		btn.mousedown(function(){
+
+			// 样式
+			if(outer.height()<80){
+				$(this).removeClass("up-default").removeClass("up-mouseover").addClass("up-mousedown");
+			}else{
+				
+				$(this).removeClass("down-default").removeClass("down-mouseover").addClass("down-mousedown");
+
+			
+			}
+			
+		});
+		btn.mouseup(function(){
+			
+			// 样式
+			if(outer.height()<80){
+				// 从上到下收缩 的事件
+				outer.height(200);
+				//内容区域
+				content.show();
+			}else{
+				// 从下到上展开 的事件
+				outer.height(10);
+				//内容区域
+				content.hide();
+				
+			}
+					
+			
+		});
+		btn.mouseover(function(){
+			
+			// 样式
+			if(outer.height()<80){
+				$(this).removeClass("up-default").removeClass("up-mousedown").addClass("up-mouseover");
+				
+			}else{
+				$(this).removeClass("down-default").removeClass("down-mousedown").addClass("down-mouseover");
+				
+			}
+			
+		});
+		btn.mouseout(function(){
+			
+			// 样式
+			if(outer.height()<80){
+				$(this).removeClass("up-mouseover").removeClass("up-mousedown").removeClass("down-mouseover").removeClass("down-mousedown").addClass("up-default");
+
+			}else{
+				$(this).removeClass("up-mouseover").removeClass("up-mousedown").removeClass("down-mouseover").removeClass("down-mousedown").addClass("down-default");
+
+			}
+		});	
+		
+	
+	}
+	
+	
+	
+	
+	
+	
+	//初始化位于【上】的folderArea
+	function initByUp(id){
+
+		var outer = $("#"+id);
+		var content = $("#"+id+"_content");
+		var btn = $("#"+id+"_btn");
+		
+		//添加class
+		outer.addClass("folder-area-up");
+		btn.addClass("folder-area-icon-up").addClass("up-default");
+		
+		btn.mousedown(function(){
+
+			// 样式
+			if(outer.height()<80){
+				$(this).removeClass("down-default").removeClass("down-mouseover").addClass("down-mousedown");
+		
+			}else{
+				$(this).removeClass("up-default").removeClass("up-mouseover").addClass("up-mousedown");
+			
+			}
+			
+		});
+		btn.mouseup(function(){
+			
+			// 样式
+			if(outer.height()<80){
+				// 从下到上收缩 的事件
+				outer.height(200);
+				//内容区域
+				content.show();
+			}else{
+				// 从上到下展开 的事件
+				outer.height(10);
+				//内容区域
+				content.hide();
+				
+			}
+					
+			
+		});
+		btn.mouseover(function(){
+			
+			// 样式
+			if(outer.height()<80){
+				$(this).removeClass("down-default").removeClass("down-mousedown").addClass("down-mouseover");
+				
+
+			}else{
+				
+				$(this).removeClass("up-default").removeClass("up-mousedown").addClass("up-mouseover");
+			}
+			
+		});
+		btn.mouseout(function(){
+			
+			// 样式
+			if(outer.height()<80){
+				$(this).removeClass("up-mouseover").removeClass("up-mousedown").removeClass("down-mouseover").removeClass("down-mousedown").addClass("down-default");
+
+			}else{
+				$(this).removeClass("up-mouseover").removeClass("up-mousedown").removeClass("down-mouseover").removeClass("down-mousedown").addClass("up-default");
+
+			}
+		});	
+		
+	
+	}
+	
+	
+</script>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Basic Dialog - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+
+<style type="text/css"> 
+	/*window的样式修改*/
+	.window{
+		background: #2189FF!important;
+	}
+	.window .window-body{   /*dialog的整个标题头div修改*/
+		border-color: #FFCCCC;
+	}
+	.panel-header,.panel-header-noborder,.window-header{  /*dialog阴影部分颜色修改*/
+		border-color: #FFCCCC;
+	}
+	.window-proxy-mask,
+	.window-mask {    /*最后一步，将原先的灰色蒙版变的更深更突出dialog的效果，适用于浅色主题*/
+		background: #000000;
+	}
+	/*为了修改提示框的内容样式*/
+	.messager-body.panel-body.panel-body-noborder.window-body>div {
+		margin-top: 53px;
+		text-align: center;
+	}
+	.messager-body.panel-body.panel-body-noborder.window-body{
+		text-align: center;
+	}
+	.panel-title{
+		text-align: center;
+		line-height: 30px!important;
+		height: 33px!important;
+	}
+	/*manage的样式调整*/
+	.messager-icon.messager-question {
+		display: none;
+	}
+	/*右侧表格的标题颜色*/
+	.accordion .accordion-header-selected {
+		background: #00bbee;
+	}
+	/*修改添加提示框的样式*/
+	input {
+		margin: 10px 0;
+		line-height: 20px;
+		background: none;
+	}
+	#id_svg_distinguish_dialog_instrumentPanel>div{
+		margin-top: 10px;
+	}
+
+	#id_svg_distinguish_dialog_pipelinePanel>div{
+		margin-top: 10px;
+	}
+</style>
+</head>
+<body>
+	<h2>Basic Dialog</h2>
+	<p>Click below button to open or close dialog.</p>
+	<div style="margin:20px 0;">
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#dlg').dialog('open')">Open</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#dlg').dialog('close')">Close</a>
+	</div>
+	<input id="xxx" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"> 
+	<div id="dlg" class="easyui-dialog" title="Basic Dialog" data-options="iconCls:'icon-save'" style="width:400px;height:200px;padding:10px">
+		The dialog content.
+		<br />
+		<input class="easyui-combobox" id="id_svg_distinguish_instrumentType" data-options="required:true,editable:true,valueField:'id',textField:'id',
+			data:[
+				{id:'1',text:'111'},
+				{id:'1',text:'111'},
+				{id:'13',text:'111'},
+				{id:'14',text:'111'},
+				{id:'15',text:'111'},
+				{id:'16',text:'111'},
+				{id:'17',text:'111'},
+				{id:'18',text:'111'},
+				{id:'19',text:'111'},
+				{id:'10',text:'111'},
+				{id:'2',text:'222'},
+				{id:'212',text:'111'},
+				{id:'213',text:'111'},
+				{id:'214',text:'111'},
+				{id:'215',text:'111'},
+				{id:'216',text:'111'},
+				{id:'217',text:'111'},
+				{id:'218',text:'111'},
+				{id:'219',text:'111'},
+				{id:'210',text:'111'},
+			
+			]
+			,onSelect:function(record){
+				
+			if(record.id){
+					$('#xxx').textbox('setValue',record.id);
+				}	
+			}"  style="width:300px;" >
+			
+			<br />
+			
+			<input class="easyui-combobox" id="id_svg_distinguish_instrumentPosition" data-options="required:true,editable:true,valueField:'id',textField:'text',
+			data:[
+				{id:'1',text:'111'},
+				{id:'1',text:'111'},
+				{id:'13',text:'111'},
+				{id:'14',text:'111'},
+				{id:'15',text:'111'},
+				{id:'16',text:'111'},
+				{id:'17',text:'111'},
+				{id:'18',text:'111'},
+				{id:'19',text:'111'},
+				{id:'10',text:'111'},
+				{id:'2',text:'222'},
+				{id:'212',text:'111'},
+				{id:'213',text:'111'},
+				{id:'214',text:'111'},
+				{id:'215',text:'111'},
+				{id:'216',text:'111'},
+				{id:'217',text:'111'},
+				{id:'218',text:'111'},
+				{id:'219',text:'111'},
+				{id:'210',text:'111'},
+			
+			]
+			,onSelect:function(record){
+				
+			if(record.id){
+					$('#xxx').textbox('setValue',record.id);
+				}	
+			}"  style="width:300px;" >
+	</div>
+</body>
+</html>

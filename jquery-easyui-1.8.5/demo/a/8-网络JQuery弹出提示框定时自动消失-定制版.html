@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		  <link rel="stylesheet" href="myButton.css">
+		  <script src="../../jquery.min.js"></script>
+		  <style>
+			.alert {
+				display: none;
+				position: fixed;
+				text-align: center;
+				top: 50%;
+				left: 50%;
+				min-width: 200px;
+				min-height: 20px;
+				margin-left: -100px;
+				z-index: 99999;
+				padding: 10px 20px 10px 20px;
+				border: 1px solid transparent;
+				border-radius: 4px;
+				
+			}
+
+			
+
+			/**信息提示**/
+			.alert-info {
+				color: #000000;
+				font-size:14px;
+				background-color: #E6F1FF;
+				border-color: #2089FF;
+			}
+			.alert-success {
+				color: #3c763d;
+				background-color: #dff0d8;
+				border-color: #d6e9c6;
+			}
+			.alert-warning {
+				color: #8a6d3b;
+				background-color: #fcf8e3;
+				border-color: #faebcc;
+			}
+
+			.alert-danger {
+				color: #a94442;
+				background-color: #f2dede;
+				border-color: #ebccd1;
+			}
+		  </style>
+	</head>
+	<body >
+	
+		<button  onclick="info_prompt('你是普通的！出现吧，Linda');">出现吧，提示框【信息提示】</button>
+
+	<button  onclick="success_prompt('你是最棒的！')">出现吧，提示框【成功提示】</button>
+		<button  onclick="fail_prompt('你是失败的！');">出现吧，提示框【失败提示】</button>
+		<button  onclick="warning_prompt('你是危险的！');">出现吧，提示框【提醒】</button>
+		
+	</body>
+	<script>
+	
+	/**
+	 * 弹出式提示框，默认1.2秒自动消失
+	 * @param message 提示信息
+	 * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+	 * @param time 消失时间
+	 */
+	var prompt = function (message, style, time)
+	{
+		style = (style === undefined) ? 'alert-success' : style;
+		time = (time === undefined) ? 120000 : time;
+		$('<div>')
+			.appendTo('body')
+			.addClass('alert ' + style)
+			.html(message)
+			.show()
+			.delay(time)
+			.fadeOut();
+	};
+
+	// 成功提示
+	var success_prompt = function(message, time)
+	{
+		prompt(message, 'alert-success', time);
+	};
+
+	// 失败提示
+	var fail_prompt = function(message, time)
+	{
+		prompt(message, 'alert-danger', time);
+	};
+
+	// 提醒
+	var warning_prompt = function(message, time)
+	{
+		prompt(message, 'alert-warning', time);
+	};
+
+	// 信息提示
+	var info_prompt = function(message, time)
+	{
+		prompt(message, 'alert-info', time);
+	};
+	</script>
+</html>

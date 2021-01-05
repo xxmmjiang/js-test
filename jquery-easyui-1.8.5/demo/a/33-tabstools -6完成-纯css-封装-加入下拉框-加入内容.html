@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tabs Tools - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	
+<style>
+#tt{
+
+    width: 850px;
+    height: 100%;
+
+}
+
+#tt .tabs-header{
+    padding-top: 0px;
+	/** tab的背景色**/
+	background-color:white;
+	
+	/** header 的外边框**/
+	border: none;
+}
+#tt .tabs-wrap{
+    display: flex;
+    flex-wrap: nowrap;
+	
+}
+#tt .tabs-wrap ul{
+    width: auto;
+    height: 50px !important;
+    max-width: calc(100% - 50px);
+    display: flex;
+	
+	/** ul 的外边框**/
+	border: none;
+	/*border-top:1px solid #bfbfbf ;
+	border-bottom:0;
+	bottom-left:0;
+	bottom-right:0;
+	padding-bottom:0;
+	margin-bottom:0;*/
+}
+
+#tt .tabs-wrap ul li{
+    padding-top: 0px;
+    height: 44px !important;
+    width: 129px;
+    text-align: center;
+    margin: 0;
+	padding:0;
+	margin-top:2px;
+    border-top: 0;
+    border-bottom: 1px solid #bfbfbf ;
+    border-left: 0px solid #bfbfbf ;
+	border-right: 1px solid #bfbfbf ;
+    overflow: hidden;
+}
+
+
+/**第一个tab的样式**/
+#tt .tabs-wrap ul .tabs-first{
+	
+    /** border-left: 1px solid #bfbfbf ; **/
+}
+
+/**最后一个tab的样式**/
+#tt .tabs-wrap ul .tabs-last{
+	/**灰色**/
+    /**border-right: 1px solid #bfbfbf ;**/
+}
+/**选中tab时的状态**/
+#tt .tabs-wrap ul .tabs-selected {
+	margin-top:0px;
+	/**顶部蓝色条纹**/
+    border-top: 5px solid #1fa7dd;
+    border-bottom: 0;
+	/**灰色**/
+	border-left: 0;
+	/**border-right: 0; **/
+}
+
+
+#tt .tabs-selected span{
+    color: #000000;
+}
+#tt .tabs-wrap ul .tabs-inner{
+    width: auto;
+    height: 45px !important;
+    line-height: 40px !important;
+    border: none;
+    border-radius: 0px;
+    background: transparent; /**透明*/
+    max-width: calc(100% - 35px);
+    overflow: hidden;
+    padding: 0px;
+}
+
+/**添加按钮**/
+#tt .tabs-wrap .icon-addTab{
+	
+	width: 100%;
+    height: 100%;
+	/**为了和其他tab的底部的边线对齐**/
+	margin-bottom:5px;
+	/**边界要保持和左侧的tab边界对齐*/
+	/**border-left:1px solid #bfbfbf; **/
+	border-bottom:1px solid #bfbfbf;
+	
+    
+}
+/**添加按钮图标--外围
+保证在图片消失时，该区域继续维持住，因为外围边框需要内部支撑起来
+**/
+#tt .tabs-wrap .icon-addTab div{
+    width: 45px;
+    height: 45px;
+
+} 
+/**添加按钮图标--图标**/
+#tt .tabs-wrap .icon-addTab div div{
+    width: 45px;
+    height: 45px;
+	display:none; 
+    background: url("./img2/add.png") no-repeat center center;
+    font-size: 35px;
+
+} 
+
+/**添加按钮图标--悬浮样式**/
+#tt .tabs-wrap .icon-addTab div:hover{
+    cursor: pointer;
+    background: url("./img2/add-hover.png") no-repeat center center;
+}
+/***tab中title的文字样式**/
+#tt span.tabs-title {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+/*tabs中删除按钮的样式*/
+#tt .tabs-header .tabs-close{
+	
+	width: 20px;
+    height: 20px;
+    background: url(./img2/close-tab.png) no-repeat center center;
+	/**距离父容器的top值**/
+	top:15px;
+}
+/*tabs中删除按钮的悬浮样式*/
+#tt .tabs-header .tabs-close:hover{
+    background: url(./img2/close-tab-hover.png) no-repeat center center;
+}
+
+
+/***内容区域**/
+#tt .tabs-panels {
+
+    border: none;
+    height: calc(100% - 50px);
+    max-height: calc(100% - 50px);
+}
+
+
+.menu-line{
+	display:none;
+}
+
+
+/******accordion*******/
+
+#range_infomation .accordion-header-selected{
+    background: url("./img2/expand.png") no-repeat 30px center !important;
+    border: none;
+}
+
+#range_infomation .accordion-header{
+	height:50px;
+    padding: 0;
+    background: url("./img2/collapse.png") no-repeat 30px center;
+    border: none;
+}
+
+#range_infomation .accordion-header-selected .panel-title{
+	
+    color: #00000;
+}
+
+#range_infomation .panel-title{
+	
+    color: #00000;
+    font-weight: normal;
+    font-size: 15px;
+	padding-top:15px;
+    padding-left: 50px;
+
+}
+
+#range_infomation .panel-title:hover{
+    color: #038de0;
+}
+
+#range_infomation .accordion-header .accordion-collapse{
+    display: none;
+}
+
+#range_infomation .accordion-header:hover{
+    color: #038de0;
+}
+
+#range_infomation .panel-tool a{
+    margin: 0 0 0 4px;
+    background-size: 16px;
+}
+
+#range_infomation .panel-tool a:hover{
+    background-size: 16px;
+}
+
+#range_infomation .panel-tool-collapse{
+    display: none;
+}
+
+#range_infomation .icon-save{
+    background: url("./img2/save.png") no-repeat center;
+}
+
+#range_infomation .icon-save:hover{
+    background: url("./img2/saveHover.png") no-repeat center;
+}
+
+#range_infomation .icon-cancel{
+    background: url("./img2/cancel.png") no-repeat center;
+}
+
+#range_infomation .icon-cancel:hover{
+    background: url("./img2/cancelHover.png") no-repeat center;
+}
+
+#range_infomation .icon-edit{
+    background: url("./img2/edit.png") no-repeat center;
+}
+
+#range_infomation .icon-edit:hover{
+    background: url("./img2/editHover.png") no-repeat center;
+}
+
+#range_infomation .datagrid-view .datagrid-body td input{
+    height: 32px !important;
+    padding: 0px;
+    margin: 0px;
+    border: 1px solid #108ee9;
+    padding-left: 5px;
+    font-size: 14px;
+}
+
+#range_infomation .panel-tool a{
+    opacity: 1;
+}
+
+
+
+
+
+
+
+/*************************************************************表格head样式*/
+
+#range_infomation {
+	font-size: 14px;
+}
+
+/*工程信息内容样式*/
+
+#range_infomation .datagrid{
+	width: 100% !important;
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+#range_infomation  .datagrid-wrap{
+	width: 100% !important;
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+#range_infomation  .datagrid-view{
+	width: 100% !important;
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+#range_infomation  .datagrid-view2, .datagrid-body{
+	width: 100% !important;
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+
+
+
+
+#range_infomation table{
+	width: 100%;
+}
+#range_infomation .datagrid-header-row, .datagrid-row{
+	height: 36px;
+	background-color: transparent !important;
+	background: transparent !important;
+}
+
+#range_infomation div.datagrid-body .datagrid-row-selected{
+	background-color: transparent !important;
+	background: url(./img2/trSelected.png) no-repeat center !important;
+	background-size: cover !important;
+}
+/***不显示datagrid的 toolbar **/
+#range_infomation  .datagrid-toolbar{
+	display: none;
+}
+/***不显示datagrid的 head**/
+#range_infomation  .datagrid-header{
+	display: none;
+}
+#range_infomation  .datagrid-header td,#range_infomation  div.datagrid-body td,#range_infomation  .datagrid-footer td{
+	border: none;
+	border-style: none;
+	width: 50%;
+	border-bottom: 1px solid #DADDDE;
+}
+
+#range_infomation  .datagrid-header td *, #range_infomation  .datagrid-body td *, #range_infomation  .datagrid-footer td *{
+	font-size: 14px;
+	font-family: "Microsoft YaHei";
+	text-align: center;
+	background-color: transparent;
+	background: transparent;
+	width: 100%;
+	height: 35px;
+	line-height: 35px;
+}
+#range_infomation  .datagrid-view .datagrid-body td input{
+	height: 34px !important;
+	padding: 0px;
+	margin: 0px;
+	border: 1px solid #108ee9;
+	padding-left: 5px;
+	font-size: 14px;
+}
+#range_infomation  .datagrid-view .datagrid-body td>div{
+	width: calc(100% - 10px);
+	padding: 0px;
+	margin: 0px;
+	margin-left: 5px;
+}
+#range_infomation  .datagrid-body td .enterEdit{
+	width: calc(100% - 7px);
+}
+
+/*表格head样式*/
+.EngineeringAttributeHead{
+	width: 100%;
+	height: 40px;
+	position: relative;	line-height: 40px;
+	font-size: 14px;
+	font-family: "Microsoft YaHei";
+	text-align: center;
+	/**底部的边界线，目前给去掉了**/
+	border-bottom: 0px solid #DADDDE;
+}
+.EngineeringAttributeHead .atrributeName{
+	width: 50%;
+	height: 100%;
+	line-height: 40px;
+	float: left;
+}
+.EngineeringAttributeHead .atrributeValue{
+	width: 50%;
+	height: 100%;
+	line-height: 40px;
+	float: left;
+}
+.EngineeringAttributeHead .atrributeEdit{
+	width: 40px;
+	height: 40px;
+	float: right;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	background: url(../themes/images/editEnginer.png) no-repeat center;
+	cursor: pointer;
+	display: none;
+}
+.EngineeringAttributeHead .atrributeEdit:hover{
+	background: url(../themes/images/editEnginer_hover.png) no-repeat center;
+}
+.EngineeringAttributeHead .atrributeEditClicked{
+	background: url(../themes/images/editEnginer_hover.png) no-repeat center;
+}
+
+
+
+
+.EngineeringAttributeHead .accordion .accordion-header:hover .panel-title {
+	color: #000000;
+}
+
+
+/*滚动条样式*/
+::-webkit-scrollbar{ /*滚动条整体样式*/
+	height: 9px !important; /*高宽分别对应横竖滚动条的尺寸*/
+	width: 9px !important;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 0;
+	border-style: dashed;
+	background-color: rgb(205,205,205);
+	border-color: transparent;
+	border-width: 1.5px;
+	background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: rgb(205,205,205);
+}
+::-webkit-scrollbar-button{
+	display: none;
+}
+::-webkit-scrollbar-corner {
+	display: none;
+}
+
+	</style>
+</head>
+<body>
+	
+	<div id="tab-tools" style="margin:20px;">
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addPanel()"></a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'" onclick="removePanel()"></a>
+	</div>	
+	
+	<div id="rightTab" style="width:500px;height:600px">
+		
+		<!-- EasyUI总的tabs样式-->
+		<div id="tt"  >
+		
+			<!--工程信息  start-->
+			<div id="range_infomation" class="easyui-accordion" title="工程信息" data-options="border:true"
+				style="border-bottom-width:0;border-top-width:0;border-right:0;border-left:0px solid #bfbfbf;">
+				<div title="基本信息"  data-options="tools:'#tools'">
+					<div class="EngineeringAttributeHead">
+						<div class="atrributeName">属性名称</div>
+						<div class="atrributeValue">属性值</div>
+					</div>
+					<table id='basic_info' style="width:100%;height:100%;" class="easyui-datagrid" data-options="fit:true">
+						 <!--
+						 <thead>   
+							<tr>   
+								<th data-options="field:'id',width:100,hidden:true">编码</th>   
+								<th data-options="field:'name',align:'center',width:200,editors:{type:'textbox'}" >name</th>   
+								<th data-options="field:'value',align:'center',width:200,editors:{type:'textbox'}" >value</th>   
+								
+							</tr>   
+						</thead>  
+						-->
+					</table>
+				</div>
+				<div title="技术参数"  data-options="tools:'#tools2'">
+					<div class="EngineeringAttributeHead">
+						<div class="atrributeName">属性名称</div>
+						<div class="atrributeValue">属性值</div>
+					</div>
+					<table id='tech_params' style="width:100%;height:100%;" class="easyui-datagrid" data-options="fit:true">
+						<!--
+						<thead>   
+							<tr>   
+								<th data-options="field:'id',width:100,hidden:true">编码</th>   
+								<th data-options="field:'name',align:'center',width:200" >name</th>   
+								<th data-options="field:'value',align:'center',width:200" >value</th>   
+								
+							</tr>   
+						</thead>  
+						-->
+					</table>
+				</div>
+				<div title="模型属性">
+					<div class="EngineeringAttributeHead">
+						<div class="atrributeName">属性名称</div>
+						<div class="atrributeValue">属性值</div>
+					</div>
+					<table id='model_property' style="width:100%;height:100%;" class="easyui-datagrid" data-options="fit:true">
+						<!--
+						<thead>   
+							<tr>   
+								<th data-options="field:'id',width:100,hidden:true">编码</th>   
+								<th data-options="field:'name',align:'center',width:200" >name</th>   
+								<th data-options="field:'value',align:'center',width:200" >value</th>   
+								
+							</tr>   
+						</thead>  
+						-->
+					</table>
+				</div>
+
+			
+			</div>
+			<!--工程信息  end-->
+								
+		
+				
+				
+				
+	
+			
+			<div data-options="title:'相关文档'">
+			
+			</div>
+		</div>
+		<div id="mm" class="easyui-menu" style="width:120px;">
+		</div>
+	
+	</div>
+	<div id="tools">
+		<a href="#" class="icon-cancel" onclick="javascript:alert('add')"></a>
+		<a href="#" class="icon-save" onclick="javascript:alert('add')"></a>
+		<a href="#" class="icon-edit" onclick="open_edit()"></a>
+	</div>
+	<div id="tools2">
+		<a href="#" class="icon-cancel" onclick="javascript:alert('add')"></a>
+		<a href="#" class="icon-save" onclick="javascript:alert('add')"></a>
+		<a href="#" class="icon-edit" onclick="javascript:alert('edit')"></a>
+	</div>
+
+			
+<script type="text/javascript">
+	
+var parentId = "rightTab";
+var outerId = "tt";
+var menuId = "mm";
+
+//初始化tabs
+$('#'+outerId).tabs({
+	fit:true
+});
+
+
+
+
+
+
+
+$("#basic_info").datagrid({
+	singleSelect:true,
+	columns:[[    
+        {field:'id',title:'id',width:100,hidden:true},    
+        {field:'name',title:'Name',align:'center'},    
+        {field:'value',title:'value',align:'center',editor:{type:'textbox'}}    
+    ]],
+	data:[
+		{id:1,name:"图号1",value:"ISO101"},
+		{id:2,name:"图号2",value:"ISO101"},
+		{id:3,name:"图号3",value:"ISO101"},
+		{id:4,name:"图号4",value:"ISO101"},
+		{id:5,name:"图名5",value:"一气化三清101"}
+
+	],
+	onDblClickRow:function(rowIndex, rowData){
+		$(this).datagrid("beginEdit",rowIndex);
+
+	}
+});
+$("#tech_params").datagrid({
+	columns:[[    
+        {field:'id',title:'id',width:100,hidden:true},    
+        {field:'name',title:'Name',width:100,align:'center'},    
+        {field:'value',title:'value',width:100,align:'center'}    
+    ]],
+	data:[
+		{id:1,name:"图号",value:"ISO101"},
+		{id:2,name:"图名",value:"一气化三清101"}
+
+	]
+});
+$("#model_property").datagrid({
+	columns:[[    
+        {field:'id',title:'id',width:100,hidden:true},    
+        {field:'name',title:'Name',width:100,align:'center'},    
+        {field:'value',title:'value',width:100,align:'center'}    
+    ]],
+	data:[
+		{id:1,name:"图号",value:"ISO101"},
+		{id:2,name:"图名",value:"一气化三清101"}
+
+	]
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function showMenu(left,top){
+	console.log("---");
+	//初始化menu
+	$('#'+menuId).html("").menu("appendItem",{
+		//parent: item.target,  // 设置父菜单元素
+		text: '打开Excel文档',
+		onclick: function(){
+			addPanel("打开Excel文档");
+		}
+	}).menu("appendItem",{
+		//parent: item.target,  // 设置父菜单元素
+		text: '打开World',
+		disabled:true,
+		onclick: function(){
+			addPanel("打开World");
+		}
+	}).menu("show",{
+		left:left,
+		top:top+50
+		
+	});
+
+}
+
+
+$('#'+outerId).find(".tabs-wrap").append("<div class='icon-addTab' title='添加' ><div><div></div></div></div>");
+$('#'+outerId+" .icon-addTab").click(function(){
+	var left =$(this).offset().left;
+	var top=$(this).offset().top;
+	
+	showMenu(left,top);
+});
+
+
+
+
+
+function addPanel(title){
+
+	$('#'+outerId).tabs('add',{
+		title: title,
+		content: '<div style="padding:10px">Content:'+title+'</div>',
+		closable: true
+	});
+}
+function removePanel(){
+	var tab = $('#'+outerId).tabs('getSelected');
+	if (tab){
+		var index = $('#'+outerId).tabs('getTabIndex', tab);
+		$('#'+outerId).tabs('close', index);
+	}
+}
+	</script>
+</body>
+</html>

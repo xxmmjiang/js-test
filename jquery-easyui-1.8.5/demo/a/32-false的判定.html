@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tabs Tools - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	
+
+</head>
+<body>
+	
+			
+<script type="text/javascript">
+//这里对单纯的false和true不测试了，这是最基本的
+
+var my = {
+	b : 0,
+	c : "0",
+	d : undefined,
+	e : "false",
+	f :null,
+	g:"null",
+	h:"undefined"
+};
+
+console.log(my);
+console.log(false==my.a);//false
+console.log(false==my.b);//true
+console.log(false==my.c);//true
+console.log(false==my.d);//false
+console.log(false==my.e);//false
+console.log(false==my.f);//false
+console.log(false==my.g);//false
+console.log(false==my.h);//false
+
+
+if(!my.a){
+	console.log("aaa");//显示
+}
+if(!my.b){
+	console.log("bbb");//显示
+}
+if(!my.c){
+	console.log("ccc");//不显示
+}
+if(!my.d){
+	console.log("ddd");//显示
+}
+if(!my.e){
+	console.log("eee");//不显示
+}
+if(!my.f){
+	console.log("fff");//显示
+}
+if(!my.g){
+	console.log("ggg");//不显示
+}
+if(!my.h){
+	console.log("hhh");//不显示
+}
+//总结归档
+/**
+做if判断使用！时，只对undefined ，null 始终有效
+0、"0"、"False"、"false"、"null"、"undefined"、都认为是有效值（注意都包括引号在内），
+
+
+
+*/
+</script>
+</body>
+</html>

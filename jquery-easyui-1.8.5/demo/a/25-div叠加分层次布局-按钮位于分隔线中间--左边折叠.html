@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+	<link rel="stylesheet" type="text/css" href="css/pid-toolbar.css" >
+ <script src="./jquery.min.js"></script>
+	<style>
+   
+		.pid-folder-icon{
+			position:absolute;
+			top:37px;
+			right:-18px;
+			width: 37px;
+			height: 37px;
+			cursor: pointer;
+		}
+		
+		/*****left*****/
+		.left-default{
+			background: url(./images/left-default.png) no-repeat center center;
+		}
+		.left-mousedown{
+			background: url(./images/left-mousedown.png) no-repeat center center;
+		}
+		.left-mouseover{
+			background: url(./images/left-mouseover.png) no-repeat center center;
+		}
+		
+		/*****right*****/
+		.right-default{
+			background: url(./images/right-default.png) no-repeat center center;
+		}
+		.right-mousedown{
+			background: url(./images/right-mousedown.png) no-repeat center center;
+		}
+		.right-mouseover{
+			background: url(./images/right-mouseover.png) no-repeat center center;
+		}
+		
+		/*****dwon*****/
+		.down-default{
+			background: url(./images/down-default.png) no-repeat center center;
+		}
+		.down-mousedown{
+			background: url(./images/down-mousedown.png) no-repeat center center;
+		}
+		.down-mouseover{
+			background: url(./images/down-mouseover.png) no-repeat center center;
+		}
+		
+		/*****up*****/
+		.up-default{
+			background: url(./images/up-default.png) no-repeat center center;
+		}
+		.up-mousedown{
+			background: url(./images/up-mousedown.png) no-repeat center center;
+		}
+		.up-mouseover{
+			background: url(./images/up-mouseover.png) no-repeat center center;
+		}
+		
+		/******content*********/
+		.content{
+			background-color:yellow; width:90%;height:100%; margin:0;padding-left:10px;padding-right:10px;text-align:center;
+		}
+		
+    </style>
+</head>
+<body style="margin:50px;">
+
+<div >
+
+
+</div>
+
+
+	<div style="z-index:99;position:relative; color:#000;width:800px; height:400px;background:gray;"> 
+	我在底层,代表最外层div，是用户提供的div
+	
+	
+		<div id="id_outer" style="position:absolute; left:0; top:0; background-color:red; width:200px; height:100%">
+			
+			<div id="id_content" style="position:absolute; " class="content">
+			
+				<div style=" ">
+					<table>
+						<tr>
+							<td>我在中间层的区域文字</td>
+						</tr>
+						<tr>
+							<td>我在中间层的区域文字</td>
+						</tr>
+						<tr>
+							<td>我在中间层的区域文字</td>
+						</tr>
+						<tr>
+							<td>我在中间层的区域文字</td>
+						</tr>
+						<tr>
+							<td>我在中间层的区域文字</td>
+						</tr>
+						<tr>
+							<td>我在中间层的区域文字</td>
+						</tr>
+					</table>
+				
+				</div>
+				
+			</div>	
+			
+			
+			<!--- 按钮布局核心逻辑：外层div是position:relative，内部图片div是position:absolute;-->
+			<div style="position:absolute;width:100%;">
+			
+				<div id="id_pro" class="pid-folder-icon left-default" style="" ></div>
+			</div>	
+		</div> 
+		
+		
+		
+	</div> 
+</body>
+<script>
+	$("#id_pro").mousedown(function(){
+		var outer = $("#id_outer");
+		// 样式
+		if(outer.width()<80){
+			$(this).removeClass("right-default").removeClass("right-mouseover").addClass("right-mousedown");
+		}else{
+			
+			$(this).removeClass("left-default").removeClass("left-mouseover").addClass("left-mousedown");
+		}
+		
+	});
+	$("#id_pro").mouseup(function(){
+		var outer = $("#id_outer");
+		// 样式
+		if(outer.width()<80){
+			// 从右到左收缩 的事件
+			$("#id_outer").width(200);
+			//内容区域
+			$("#id_content").show();
+		}else{
+			// 从左到右收缩 的事件
+			$("#id_outer").width(10);
+			//内容区域
+			$("#id_content").hide();
+			
+			
+		}
+		
+		
+		
+		
+	});
+	$("#id_pro").mouseover(function(){
+		var outer = $("#id_outer");
+		// 样式
+		if(outer.width()<80){
+			$(this).removeClass("right-default").removeClass("right-mousedown").addClass("right-mouseover");
+
+		}else{
+			$(this).removeClass("left-default").removeClass("left-mousedown").addClass("left-mouseover");
+
+		}
+		
+	});
+	$("#id_pro").mouseout(function(){
+		var outer = $("#id_outer");
+		// 样式
+		if(outer.width()<80){
+			$(this).removeClass("left-mouseover").removeClass("left-mousedown").removeClass("right-mouseover").removeClass("right-mousedown").addClass("right-default");
+
+		}else{
+			$(this).removeClass("left-mouseover").removeClass("left-mousedown").removeClass("right-mouseover").removeClass("right-mousedown").addClass("left-default");
+
+		}
+	});
+</script>
+</html>

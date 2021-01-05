@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tabs Tools - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	
+
+</head>
+<body>
+<span id="father">
+	<a id="child1" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" ></a> 
+	<a id="child2" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" ></a> 
+</span>
+
+<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="trigger1()">触发父亲</a> 
+<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="trigger2()">触发孩子-事件起泡</a> 
+<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="trigger3()">触发孩子-阻止事件起泡</a> 
+<div id="cc" style="margin-top:50px;width:300px;height:200px;background-color:green;text-align:center;font-size:20px;padding:10px;">
+
+	<span></span>
+</div>
+	
+<script type="text/javascript">
+
+/*
+父亲绑定的自定义事件
+*/
+$("#father").bind("changeColor",function(ev,p){
+	console.log(p);
+	
+	$("#cc").css({"background-color":p.color});
+})
+/*
+父亲绑定的自定义事件
+*/
+$("#child1").bind("changeColor",function(ev,p){
+	console.log(p);
+
+	$("#cc").css({"background-color":p.color});
+})
+
+$("#child2").bind("changeColor",function(ev,p){
+	console.log(p);
+
+	$("#cc").css({"background-color":p.color});
+	//通过返回false来取消默认的行为并阻止事件起泡。
+	return false;
+})
+
+
+
+function trigger1(){
+	$("#father").trigger("changeColor",{color:"red",arr:[1,2,3,4]});
+}
+function trigger2(){
+	$("#child1").trigger("changeColor",{color:"red",arr:[1,2,3,4]});
+}
+function trigger3(){
+	
+	$("#child2").trigger("changeColor",{color:"red",arr:[1,2,3,4]});
+}
+
+
+
+
+</script>		
+
+</body>
+
+</html>

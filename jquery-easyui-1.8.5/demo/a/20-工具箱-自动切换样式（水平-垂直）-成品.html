@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+	<link rel="stylesheet" type="text/css" href="css/pid-toolbar.css" >
+
+	<style>
+        * {
+            margin:0;
+            padding:0;
+        }
+       
+	   
+    </style>
+</head>
+<body style="margin:50px;">
+<!-- 主视图区域 -->
+    <div style="width:700px;height:600px;padding:10px;border:2px solid green;">
+       <button value="0" onclick="changeStyle(this)" >水平/垂直</button>
+	   <br /><br />
+	   <!-- pid-toolbar全局手柄 -->
+	   <div class="pid-toolbar pid-toolbar-vertical" style="">
+	   
+			<!-- 工具箱--顶部 -->
+			<a class="pid-toolbar-head" title="收起" >
+				<div class="bag-close"></div>
+			</a>
+			
+			<!-- 工具箱--底部功能区 -->
+			<div  class="pid-toolbar-container" style="">
+					<div style="margin: 4px auto auto 12px;">
+				
+							<div class="pid-toolbar-item" style="">
+								<a title="复位" href="javascript:void(0)"  name="复位" class="pid-toolbar-btn">
+									<div class="pid-toolbar-icon recover-close"></div>
+								</a>
+							</div>
+							<div class="pid-toolbar-item"  style="">
+								<a title="平移" href="javascript:void(0)"  name="平移" class="pid-toolbar-btn">
+									<div class="pid-toolbar-icon hand-close"></div>
+								</a>
+							</div>
+							<div class="pid-toolbar-item"  style="">
+								<a title="隐藏" href="javascript:void(0)"  name="隐藏" class="pid-toolbar-btn">
+									<div class="pid-toolbar-icon hidemodel-close"></div>
+								</a>
+							</div>
+							<div class="pid-toolbar-item"  style="">
+								<a title="隐藏其他" href="javascript:void(0)"  name="隐藏其他" class="pid-toolbar-btn">
+									<div class="pid-toolbar-icon hideothers-close"></div>
+								</a>
+							</div>
+							<div class="pid-toolbar-item"  style="">
+								<a title="模型变色" href="javascript:void(0)"  name="模型变色" class="pid-toolbar-btn">
+									<div class="pid-toolbar-icon changecolor-close"></div>
+								</a>
+							</div>
+							<div class="pid-toolbar-item"  style="">
+								<a title="截图" href="javascript:void(0)"  name="截图" class="pid-toolbar-btn">
+									<div class="pid-toolbar-icon cut-close"></div>
+								</a>
+							</div>
+							<div class="pid-toolbar-item"  style="">
+								<a title="云线" href="javascript:void(0)"  name="云线" class="pid-toolbar-btn">
+									<div class="pid-toolbar-icon cloud-close"></div>
+								</a>
+							</div>
+							<div class="pid-toolbar-item"  style="">
+								<a title="文字批注" href="javascript:void(0)"  name="文字批注" class="pid-toolbar-btn">
+									<div class="pid-toolbar-icon note-close"></div>
+								</a>
+							</div>
+							<div class="pid-toolbar-item"  style="">
+								<a title="线段" href="javascript:void(0)"  name="线段" class="pid-toolbar-btn">
+									<div class="pid-toolbar-icon line-close"></div>
+								</a>
+							</div>
+				
+					</div>
+			</div>
+	   </div>
+
+
+			
+	
+    </div>
+   
+</body>
+<script>
+function changeStyle(This){
+	alert($(This).val());
+}
+</script>
+</html>

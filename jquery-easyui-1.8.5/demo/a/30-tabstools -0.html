@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tabs Tools - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	
+<style>
+#rightTab{
+
+    width: 350px;
+    height: 100%;
+
+}
+
+#rightTab .tabs-header{
+    padding-top: 0px;
+	/** tab的背景色**/
+	background-color:white;
+	
+	/** header 的外边框**/
+	border: none;
+}
+#rightTab .tabs-wrap{
+    display: flex;
+    flex-wrap: nowrap;
+	
+}
+#rightTab .tabs-wrap ul{
+    width: auto;
+    height: 50px !important;
+    max-width: calc(100% - 50px);
+    display: flex;
+	
+	/** ul 的外边框**/
+	border: none;
+	/*border-top:1px solid #bfbfbf ;
+	border-bottom:0;
+	bottom-left:0;
+	bottom-right:0;
+	padding-bottom:0;
+	margin-bottom:0;*/
+}
+
+#rightTab .tabs-wrap ul li{
+    padding-top: 0px;
+    height: 44px !important;
+    width: 129px;
+    text-align: center;
+    margin: 0px;
+	margin-top:2px;
+    border-top: 0;
+    border-bottom: 1px solid #bfbfbf ;
+    border-left: 0px solid #bfbfbf ;
+	border-right: 1px solid #bfbfbf ;
+    overflow: hidden;
+}
+
+
+/**第一个tab的样式**/
+#rightTab .tabs-wrap ul .tabs-first{
+	
+    /** border-left: 1px solid #bfbfbf ; **/
+}
+
+/**最后一个tab的样式**/
+#rightTab .tabs-wrap ul .tabs-last{
+	/**灰色**/
+    /**border-right: 1px solid #bfbfbf ;**/
+}
+/**选中tab时的状态**/
+#rightTab .tabs-wrap ul .tabs-selected {
+	margin-top:0px;
+	/**顶部蓝色条纹**/
+    border-top: 5px solid #1fa7dd;
+    border-bottom: 0;
+	/**灰色**/
+	border-left: 0;
+	border-right: 0;
+}
+
+
+#rightTab .tabs-selected span{
+    color: #000000;
+}
+#rightTab .tabs-wrap ul .tabs-inner{
+    width: auto;
+    height: 45px !important;
+    line-height: 40px !important;
+    border: none;
+    border-radius: 0px;
+    background: transparent; /**透明*/
+    max-width: calc(100% - 35px);
+    overflow: hidden;
+    padding: 0px;
+}
+
+/**添加按钮**/
+#rightTab .tabs-wrap .icon-addTab{
+	width: 100%;
+    height: 100%;
+	/**为了和其他tab的底部的边线对齐**/
+	margin-bottom:5px;
+	/**边界要保持和左侧的tab边界对齐*/
+	border-left:1px solid #bfbfbf;
+	border-bottom:1px solid #bfbfbf;
+	
+    
+}
+/**添加按钮图标**/
+#rightTab .tabs-wrap .icon-addTab div{
+    width: 45px;
+    height: 45px;
+    background: url("./img/add.png") no-repeat center center;
+    font-size: 35px;
+
+} 
+/**添加按钮图标--悬浮样式**/
+#rightTab .tabs-wrap .icon-addTab div:hover{
+    cursor: pointer;
+    background: url("./img/add-hover.png") no-repeat center center;
+}
+/***tab中title的文字样式**/
+#rightTab span.tabs-title {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+/*tabs中删除按钮的样式*/
+#rightTab .tabs-header .tabs-close{
+	
+	width: 20px;
+    height: 20px;
+    background: url(./img/close-tab.png) no-repeat center center;
+	/**距离父容器的top值**/
+	top:15px;
+}
+/*tabs中删除按钮的悬浮样式*/
+#rightTab .tabs-header .tabs-close:hover{
+    background: url(./img/close-tab-hover.png) no-repeat center center;
+}
+
+
+/***内容区域**/
+#rightTab .tabs-panels {
+
+    border: none;
+    height: calc(100% - 50px);
+    max-height: calc(100% - 50px);
+}
+
+
+
+	</style>
+</head>
+<body>
+	
+	<div id="tab-tools" style="margin:20px;">
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addPanel()"></a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'" onclick="removePanel()"></a>
+	</div>	
+	
+	<div id="rightTab">
+		<div id="tt" class="easyui-tabs" data-options="" style="width:700px;height:250px">
+		</div>
+			
+	
+	</div>
+	
+			
+	<script type="text/javascript">
+	$('#tt').tabs();
+	$("#rightTab").find(".tabs-wrap").append("<div class='icon-addTab' title='添加' ><div>  </div></div>");
+
+
+
+
+	
+		var index = 0;
+		function addPanel(){
+			index++;
+			$('#tt').tabs('add',{
+				title: 'Tab'+index,
+				content: '<div style="padding:10px">Content'+index+'</div>',
+				closable: true
+			});
+		}
+		function removePanel(){
+			var tab = $('#tt').tabs('getSelected');
+			if (tab){
+				var index = $('#tt').tabs('getTabIndex', tab);
+				$('#tt').tabs('close', index);
+			}
+		}
+	</script>
+</body>
+</html>

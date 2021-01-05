@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tabs Tools - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	
+
+</head>
+<body>
+	
+	<div id="tab-tools" style="margin:20px;">
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addPanel()"></a>
+				
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'" onclick="removePanel()"></a>
+				
+	</div>	
+	 <style>
+/*** header**/
+#tt .tabs-header{
+    padding-top: 0px;
+	/** tab的背景色**/
+	background-color:white;
+	
+	/** header 的外边框**/
+	border: none;
+}
+
+/*** header-wrap **/
+#tt .tabs-wrap{
+    display: flex;
+    flex-wrap: nowrap;
+	
+}
+
+/*** header-wrap-ul **/
+#tt .tabs-wrap ul{
+    width: auto;
+    height: 50px !important;
+    max-width: calc(100% - 50px);
+    display: flex;
+	
+	/** ul 的外边框**/
+	border: none;
+	/*border-top:1px solid #bfbfbf ;
+	border-bottom:0;
+	bottom-left:0;
+	bottom-right:0;
+	padding-bottom:0;
+	margin-bottom:0;*/
+}
+
+/*** header-wrap-ul-li **/
+#tt .tabs-wrap ul li{
+    padding-top: 0px;
+    height: 44px !important;
+    width: 129px;
+    text-align: center;
+    margin: 0px;
+	margin-top:2px;
+    border-top: 0;
+    border-bottom: 1px solid #bfbfbf ;
+    border-left: 0px solid #bfbfbf ;
+	border-right: 1px solid #bfbfbf ;
+    overflow: hidden;
+}
+
+
+/**第一个tab的样式**/
+#tt .tabs-wrap ul .tabs-first{
+	
+    /** border-left: 1px solid #bfbfbf ; **/
+}
+
+/**最后一个tab的样式**/
+#tt .tabs-wrap ul .tabs-last{
+	/**灰色**/
+    /**border-right: 1px solid #bfbfbf ;**/
+}
+/**选中tab时的状态**/
+#tt .tabs-wrap ul .tabs-selected {
+	margin-top:0px;
+	/**顶部蓝色条纹**/
+    border-top: 5px solid #1fa7dd;
+    border-bottom: 0;
+	/**灰色**/
+	border-left: 0;
+	border-right: 0;
+}
+
+
+
+#tt .tabs-wrap ul .tabs-inner{
+    width: auto;
+    height: 45px !important;
+    line-height: 40px !important;
+    border: none;
+    border-radius: 0px;
+    background: transparent; /**透明*/
+    max-width: calc(100% - 35px);
+    overflow: hidden;
+    padding: 0px;
+}
+
+
+/**添加按钮**/
+#tt .tabs-wrap .icon-addTab{
+	width: 100%;
+    height: 100%;
+	/**为了和其他tab的底部的边线对齐**/
+	margin-bottom:5px;
+	/**边界要保持和左侧的tab边界对齐*/
+	border-left:1px solid #bfbfbf;
+	border-bottom:1px solid #bfbfbf;
+	
+    
+}
+/**添加按钮图标**/
+#tt .tabs-wrap .icon-addTab div{
+    width: 45px;
+    height: 45px;
+    background: url("./img/add.png") no-repeat center center;
+    font-size: 35px;
+
+} 
+/**添加按钮图标--悬浮样式**/
+#tt .tabs-wrap .icon-addTab div:hover{
+    cursor: pointer;
+    background: url("./img/add-hover.png") no-repeat center center;
+}
+/***tab中title的文字样式**/
+#tt span.tabs-title {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+/*tabs中删除按钮的样式*/
+#tt .tabs-header .tabs-close{
+	
+	width: 20px;
+    height: 20px;
+    background: url(./img/close-tab.png) no-repeat center center;
+	/**距离父容器的top值**/
+	top:15px;
+}
+/*tabs中删除按钮的悬浮样式*/
+#tt .tabs-header .tabs-close:hover{
+    background: url(./img/close-tab-hover.png) no-repeat center center;
+}
+
+
+/***内容区域**/
+#tt .tabs-panels {
+
+    border: none;
+    height: calc(100% - 50px);
+    max-height: calc(100% - 50px);
+}
+
+
+
+	</style>
+	
+	<div id="rightTab">
+		<div id="aa" class="easyui-tabs" data-options="" style="width:700px;height:250px">
+		</div>
+			
+	
+	</div>
+	
+			
+	<script type="text/javascript">
+	var parentId = "rightTab";
+	var outerId = "aa";
+	
+	$('#'+outerId).tabs();
+	$("#"+outerId).find(".tabs-wrap").append("<div class='icon-addTab' title='添加' ><div>  </div></div>");
+	//绑定加号点击事件
+	$("#"+outerId+" .icon-addTab div").click(function(){
+		addPanel();
+	});
+	
+	/*
+	 *	使用jquery的css语法，修改EasyUI中关于tab的原始样式
+	 此种方式虽然丑陋，但毕竟修复了Easyui的通用tabs样式，为了不影响外部对该组件的使用。
+	 使用jquery选择器，单独修改自己的easyui的tab样式，这样就不会影响别人的的tabs样式了。
+	 */
+	 
+	/*** header**/
+	$("#"+outerId+" .tabs-header").css({
+		"padding-top": 0,
+		/** tab的背景色**/
+		"background-color":"white",
+		
+		/** header 的外边框**/
+		"border": 0
+	});	
+	
+	/*** header-wrap **/
+	$("#"+outerId+" .tabs-header .tabs-wrap").css({
+		"display": "flex",
+		"flex-wrap":"nowrap"
+	});	
+	
+	
+	/*** header-wrap-ul **/
+	$("#"+outerId+" .tabs-header .tabs-wrap ul").css({
+		"width": "auto",
+		"height":"50px !important",
+		"max-width":"calc(100% - 50px)",
+		"display":"flex",
+		/** ul 的外边框**/
+		"border": 0
+	});	
+
+	/*** header-wrap-ul-li **/
+	$("#"+outerId+" .tabs-header .tabs-wrap ul li").css({
+		"padding-top": 0,
+		"height": "44px !important",
+		"width": "129px",
+		"text-align": "center",
+		"margin": 0,
+		"margin-top":"2px",
+		"border-top": 0,
+		"border-bottom": "1px solid #bfbfbf",
+		"border-left": 0,
+		"border-right": "1px solid #bfbfbf",
+		"overflow": "hidden"
+	});	
+
+	/**第一个tab的样式**/
+	$("#"+outerId+" .tabs-header .tabs-wrap ul .tabs-first").css({
+		/**
+		"border-left": "1px solid #bfbfbf"
+		**/
+	});	
+
+	/**最后一个tab的样式**/
+	$("#"+outerId+" .tabs-header .tabs-wrap ul .tabs-last").css({
+		/**灰色**/
+		/** "border-right": "1px solid #bfbfbf" **/
+	});	
+
+	/**选中tab时的状态**/
+	$("#"+outerId+" .tabs-header .tabs-wrap ul .tabs-selected").css({
+		"margin-top":0,
+		/**顶部蓝色条纹**/
+		"border-top": "5px solid #1fa7dd",
+		"border-bottom": 0,
+		/**灰色**/
+		"border-left": 0,
+		"border-right": 0
+	});	
+
+	/** 每个tab内部核心样式**/
+	$("#"+outerId+" .tabs-header .tabs-wrap ul .tabs-inner").css({
+		"width": "auto",
+		"height": "45px !important",
+		"line-height": "40px !important",
+		"border": 0,
+		"border-radius": 0,
+		"background": "transparent", /**透明*/
+		"max-width": "calc(100% - 35px)",
+		"overflow": "hidden",
+		"padding": 0
+	});	
+
+	/**添加按钮**/
+	$("#"+outerId+" .tabs-header .tabs-wrap .icon-addTab").css({
+		"width": "100%",
+		"height": "100%",
+		/**为了和其他tab的底部的边线对齐**/
+		"margin-bottom":"5px",
+		/**边界要保持和左侧的tab边界对齐*/
+		"border-left":"1px solid #bfbfbf",
+		"border-bottom":"1px solid #bfbfbf"
+	});	
+	/**添加按钮图标**/
+	$("#"+outerId+" .tabs-header .tabs-wrap .icon-addTab div").css({
+		"width": "45px",
+		"height": "45px",
+		"background": "url('./img/add.png') no-repeat center center",
+		"font-size": "35px"
+	});	
+	/**添加按钮图标--悬浮样式**/
+	$("#"+outerId+" .tabs-header .tabs-wrap .icon-addTab div").hover(
+		  function () {
+			$(this).css({
+				"cursor": "pointer",
+				"background": "url('./img/add-hover.png') no-repeat center center"
+			});
+		  },
+		  function () {
+			$(this).css({
+				"cursor": "auto",
+				"background": "url('./img/add.png') no-repeat center center"
+			});
+		  }
+	);
+
+	/***tab中title的文字样式**/
+	$("#"+outerId+" span.tabs-title").css({
+		"font-size": "14px",
+		"font-weight": "normal"
+	});	
+	
+	/*tabs中删除按钮的样式*/
+	$("#"+outerId+" .tabs-header .tabs-close").css({
+		"width": "20px",
+		"height": "20px",
+		"background": "url('./img/close-tab.png') no-repeat center center",
+		/**距离父容器的top值**/
+		"top":"15px"
+	});	
+	/*tabs中删除按钮的悬浮样式*/
+	$("#"+outerId+" .tabs-header .tabs-close:hover").hover(
+		  function () {
+			$(this).css({
+				"background": "url('./img/close-tab-hover.png') no-repeat center center"
+			});
+		  },
+		  function () {
+			$(this).css({
+				"background": "url('./img/close-tab.png') no-repeat center center"
+			});
+		  }
+	);
+
+	/***内容区域**/
+	$("#"+outerId+" .tabs-panels").css({
+		"border": 0,
+		"height": "calc(100% - 50px)",
+		"max-height": "calc(100% - 50px)"
+	});	
+
+
+
+
+
+
+
+	//添加tab
+	var index = 0;
+	function addPanel(){
+		index++;
+		$('#'+outerId).tabs('add',{
+			title: 'Tab'+index,
+			content: '<div style="padding:10px">啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊Content<br />啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊'+index+'</div>',
+			closable: true
+		});
+	}
+	//删除tab
+	
+	function removePanel(){
+		var tab = $('#'+outerId).tabs('getSelected');
+		if (tab){
+			var index = $('#'+outerId).tabs('getTabIndex', tab);
+			$('#'+outerId).tabs('close', index);
+		}
+	}
+	
+	</script>
+</body>
+</html>

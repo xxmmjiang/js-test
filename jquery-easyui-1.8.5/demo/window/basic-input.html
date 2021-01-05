@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Basic Window - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+</head>
+<body>
+	<h2>Basic Window</h2>
+	<p>Window can be dragged freely on screen.</p>
+	<div style="margin:20px 0;">
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#w').window('open')">Open</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#w').window('close')">Close</a>
+	</div>
+	<div id="w" class="easyui-window" title="Basic Window" data-options="iconCls:'icon-save',modal:true" style="width:500px;height:200px;padding:10px;">
+		The window content.
+		<input class="easyui-combobox" id="id_svg_distinguish_instrumentType" data-options="required:true,editable:true,valueField:'id',textField:'id',data:[{id:'aa',text:'a1'},{id:'bb',text:'b1'}],onSelect:function(record){
+				if(record.id){
+					$('#id_svg_distinguish_instrumentPosition').combobox('setValue',record.id);
+				}
+				
+			}"  style="width:300px;" >
+			
+		<input class="easyui-combobox" id="id_svg_distinguish_instrumentPosition" data-options="required:true,editable:true,valueField:'id',textField:'text',url:'atlas/getCombobox4Instrument.do',onSelect:function(record){
+				
+			}"  style="width:300px;">
+	</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Accordion Tools - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	<style>
+
+
+.cut-window-save-icon{
+    color: white;
+    background: url(img5/saveBtn.png) no-repeat center;
+    background-size: cover;
+}
+.cut-window-save-icon:hover{
+    border: 1px solid #1fa7dd;
+}
+.cut-window-cancel-icon{
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #cccccc;
+    background: url(img5/cancelBtn.png) no-repeat center;
+    background-size: cover;
+}
+
+.cut-window-cancel-icon:hover{
+    color: #1fa7dd;
+    border: 1px solid #1fa7dd;
+}
+
+.pid-plugin-intellectdwg-cut-window-btn{
+    border-radius: 3px;
+    height: 28px;
+    width: 52px;
+    margin-right: 25px;
+    float: right;
+    border: none;
+    cursor: pointer;
+}
+
+
+        
+	</style>
+</head>
+<body style="margin:0;padding:0;">
+
+
+<!-- 截图窗口 -->
+<div id="screen_shot_window" class="easyui-window" title="二维区域截图" style="overflow: hidden; width: 950px;height: 550px;">
+    <img id="screen_shot_content" style="width: 100%;height: 90%;" src="">
+    <div style="text-align: center;width: 100%;height: 10%;">
+    		<div style="margin-top: 1%;float: right;">
+    			<button id="screenshotSave-pid" class="pid-plugin-intellectdwg-cut-window-btn cut-window-save-icon">保存</button>
+    			<button id="screenshotCancel-pid" class="pid-plugin-intellectdwg-cut-window-btn cut-window-cancel-icon">取消</button>
+    		</div>
+    </div>
+</div>
+<div id="screenShotMaskPID" style=" position: absolute;z-index: 4;background: rgba(226, 223, 223, 0.4);top: 0px;"></div>
+<script>
+ $("#screen_shot_window").window({
+        left: "26%",
+        top: "20%",
+        closed: false,
+        minimizable: false,
+        maximizable: false,
+        resizable: false,
+        collapsible: false,
+        onClose : function () {
+            $("#screenShotMaskPID").hide();
+        }
+    });
+
+
+
+$("#screenshotSave-pid").click(function(){
+	 var maskWidth = $(window).width();
+                    var maskHeight = $(window).height();
+                    $("#screenShotMaskPID").css({width : maskWidth, height : maskHeight}).show();
+});
+$("#screenshotCancel-pid").click(function(){
+	
+});
+</script>
+</body>
+</html>

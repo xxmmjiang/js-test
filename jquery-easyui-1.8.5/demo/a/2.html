@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Accordion Tools - jQuery EasyUI Demo</title>
+
+	<style>
+	
+	/* 无特效*/
+	.slickButton11 {
+		color: white;
+		font-weight: bold;
+		padding: 10px;
+		border: solid 1px black;
+		background: lightgreen;
+		cursor: pointer;
+	}
+	 
+	.slickButton11:hover {
+		color: black;
+		background: yellow;
+	}
+ 
+	/* 背景色渐变*/
+	.slickButton12 {
+		color: white;
+		font-weight: bold;
+		padding: 10px;
+		border: solid 1px black;
+		background: lightgreen;
+		cursor: pointer;
+		transition: background 0.5s;
+		-webkit-transition: background 0.5s;
+	}
+	 
+	.slickButton12:hover {
+		color: black;
+		background: yellow;
+	}
+	
+	/* 背景色、文字都渐变*/
+	.slickButton13 {
+		color: white;
+		font-weight: bold;
+		padding: 10px;
+		border: solid 1px black;
+		background: lightgreen;
+		cursor: pointer;
+		transition: background 0.5s, color 0.5s;
+		-webkit-transition: background 0.5s, color 0.5s;
+	}
+ 
+	.slickButton13:hover {
+		color: black;
+		background: yellow;
+	}
+	
+	/* 所有样式都渐变*/
+	.slickButton14 {
+		color: white;
+		font-weight: bold;
+		padding: 10px;
+		border: solid 1px black;
+		background: lightgreen;
+		cursor: pointer;
+		transition: all 0.5s;
+		-webkit-transition: all 0.5s;
+	}
+ 
+	.slickButton14:hover {
+		color: black;
+		background: yellow;
+	}
+
+/*淡入淡出
+通过修改 opacity 属性改变透明度，从而实现图像的淡入淡出。*/
+	.slickButton2 {
+		color: white;
+		font-weight: bold;
+		padding: 10px;
+		border: solid 1px black;
+		background: lightgreen;
+		cursor: pointer;
+		opacity: 0.5;
+		transition: opacity 0.5s;
+		-webkit-transition: opacity 0.5s;
+	}
+ 
+	.slickButton2:hover {
+		opacity: 1;
+	}
+
+/*阴影（投影）效果
+使用 box-shadow 属性可以为任何盒子元素添加阴影，从而制作出漂亮的悬停效果。*/
+	.slickButton3 {
+		color: white;
+		font-weight: bold;
+		padding: 10px;
+		border: solid 1px black;
+		background: lightgreen;
+		cursor: pointer;   
+		transition: box-shadow 0.5s;
+		-webkit-transition: box-shadow 0.5s;
+	}
+	
+	.slickButton3:hover {
+		box-shadow:5px 5px 10px gray;
+	}
+
+	/*发光效果
+同样利用 box-shadow 属性可以实现发光效果，只不过把阴影偏移量设为0。*/
+	.slickButton4 {
+		color: white;
+		font-weight: bold;
+		padding: 10px;
+		border: solid 1px black;
+		background: lightgreen;
+		cursor: pointer;   
+		transition: box-shadow 0.5s;
+		-webkit-transition: box-shadow 0.5s;
+	}
+	
+	.slickButton4:hover {
+		box-shadow:0px 0px 20px orange;
+	}
+		</style>
+</head>
+
+<body>
+	<button class="slickButton11">hangge.com</button>
+	<br /><br />
+	<button class="slickButton12">hangge.com</button>
+	<br /><br />
+	<button class="slickButton13">hangge.com</button>
+	<br /><br />
+	<button class="slickButton14">hangge.com</button>
+	<br /><br />
+	<button class="slickButton2">hangge.com</button>
+	<br /><br />
+	<button class="slickButton3">hangge.com</button>
+	<br /><br />
+	<button class="slickButton4">hangge.com</button>
+</body>
+</html>

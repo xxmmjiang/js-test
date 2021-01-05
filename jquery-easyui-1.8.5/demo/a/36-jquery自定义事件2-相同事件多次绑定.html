@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tabs Tools - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	
+
+</head>
+<body>
+<a id="aa" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="mytrigger1()">绑定第1个事件</a> 
+<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="mytrigger2()">绑定第2个事件</a> 
+<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="trigger()">触发</a> 
+<div id="cc" style="margin-top:50px;width:300px;height:200px;background-color:green;text-align:center;font-size:20px;padding:10px;">
+
+	<span></span>
+</div>
+	
+<script type="text/javascript">
+
+
+
+function mytrigger1(){
+
+	/*
+	按钮的自定义事件
+	*/
+	$("#aa").bind("changeColor",function(ev,color){
+
+		$("#cc").css({"background-color":color});
+	})
+}
+
+function mytrigger2(){
+	/*
+	按钮的自定义事件
+	*/
+	$("#aa").bind("changeColor",function(ev,e){
+
+		$("#cc").html("msg:"+e);
+		
+	})
+}
+
+function trigger(){
+	$("#aa").trigger("changeColor","red");
+}
+
+
+
+
+ //$("#log").text("e.pageX: " + e.pageX + ", e.pageY: " + e.pageY);
+
+
+</script>		
+
+</body>
+
+</html>

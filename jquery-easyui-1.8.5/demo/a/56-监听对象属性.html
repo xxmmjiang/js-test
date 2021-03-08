@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Accordion Tools - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+	<style>
+
+
+	</style>
+</head>
+<body>
+	
+	
+	<input id="a" width="100px"/> 
+	<div>
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'"    onclick="myclick()">easyui</a>  
+	</div>
+	
+
+</body>
+<script>
+	
+	var envirenment = {
+		name:"jiangxu"
+	}
+	
+	watch(function(value){
+		console.log("111"+":"+value);
+	})
+	watch(function(value){
+		console.log("222"+":"+value);
+	})
+	function watch(callaback){
+		Object.defineProperty(envirenment, "name", {
+			set : function(value){
+				name = value;
+				callaback(value);	
+			}
+		})
+	}
+	
+	function myclick(){
+		// console.log("myclick")
+		var v = $("#a").val();
+		alert(v);
+		envirenment.name=v;
+	}
+
+</script>
+</html>

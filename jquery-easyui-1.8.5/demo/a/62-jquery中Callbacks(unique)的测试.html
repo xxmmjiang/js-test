@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+
+
+	<style>
+      
+	   
+    </style>
+</head>
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'"   
+            onclick="add()">add</a> 
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'"   
+            onclick="remove()">remove</a> 
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'"   
+            onclick="pop()">pop</a> 
+
+<body style="margin:200px;">
+
+<div id="a" style="background-color:green;width:200px;height:200px;">
+	
+</div>
+	
+
+</body>
+<script>
+
+/**
+ * 点击图例的事件的回调集合
+ */
+var clickCallback = $.Callbacks("unique");
+
+var tempF= null;
+
+// var index = 1;
+
+function say(){
+    console.log("-------start------");
+    clickCallback.fire();
+    console.log("-------end------");
+}
+/**
+ * 订阅
+ */ 
+function add(){
+    tempF = function (){
+       console.log("我是1");
+    }  
+
+    clickCallback.add(tempF);
+
+    say();
+}
+	
+//取消订阅
+function remove(){
+    if(tempF){
+        clickCallback.remove(tempF);
+    }
+
+
+    say();
+}    
+
+function pop(){
+    clickCallback.pop();
+    say();
+}
+</script>
+</html>

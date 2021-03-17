@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+	<link rel="stylesheet" type="text/css" href="css/pid-toolbar.css" >
+    <script type="text/javascript" src="../../jquery.min.js"></script>
+	<style>
+        * {
+            margin:0;
+            padding:0;
+            /* 通过制定 x y ，来移动鼠标在图片的相对位置 */
+            cursor: url(./img7/2.ico) 50 50,auto;
+        }
+      
+
+       .ttt{
+        /*可以用的透明图片作为鼠标样式，未测试成功*/  
+         /* cursor: url(./img7/2.ico),auto; */
+         cursor: pointer;
+        
+        /**禁用鼠标样式*/
+        /* cursor: none; */
+       }
+	   
+    </style>
+</head>
+<body style="margin:200px;">
+
+<div id="a" style="background-color:green;width:200px;height:200px;">
+	
+</div>
+	
+
+</body>
+<script>
+// $("#a").mousemove(function(e){
+// 	console.log(e.offsetX+"--"+e.offsetY);
+// });
+
+$("#a").mouseover(function(e){
+	$("#a").addClass("ttt");
+    console.log(e.offsetX+"--"+e.offsetY);
+});
+
+$("#a").mouseout(function(e){
+	console.log(e.offsetX+"--"+e.offsetY);
+});
+</script>
+</html>

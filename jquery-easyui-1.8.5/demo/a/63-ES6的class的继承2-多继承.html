@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+
+
+	<style>
+      
+	   
+    </style>
+</head>
+
+
+</body>
+<script>
+
+function mix(...mixins) {
+  class Mix {
+    constructor() {
+      for (let mixin of mixins) {
+        copyProperties(this, new mixin()); // 拷贝实例属性
+      }
+    }
+  }
+
+  for (let mixin of mixins) {
+    copyProperties(Mix, mixin); // 拷贝静态属性
+    copyProperties(Mix.prototype, mixin.prototype); // 拷贝原型属性
+  }
+
+  return Mix;
+}
+
+function copyProperties(target, source) {
+  for (let key of Reflect.ownKeys(source)) {
+    if ( key !== 'constructor'
+      && key !== 'prototype'
+      && key !== 'name'
+    ) {
+      let desc = Object.getOwnPropertyDescriptor(source, key);
+      Object.defineProperty(target, key, desc);
+    }
+  }
+}
+
+
+
+
+//我是 Color 接口
+class Color{
+  constructor() {
+
+  }
+  printC(){
+	console.log(this.x)
+  }
+}
+
+//我是 Point 接口
+class Point{
+  constructor() {
+
+  }
+  printP(){
+	console.log(this.y)
+  }
+}
+class ColorPoint extends mix(Point,Color) {
+  constructor(x, y) {
+
+    super();
+	this.x = x;
+	this.y = y;
+  }
+  
+  printCP(){
+	this.printC();
+	this.printP();
+  }
+}
+
+
+
+console.log(Object.getPrototypeOf(ColorPoint) === Point);//false
+console.log(Object.getPrototypeOf(ColorPoint) === Color);//false
+var cp = new ColorPoint(1,2);
+cp.printCP();
+console.log(cp instanceof ColorPoint)
+console.log("------------------")
+console.log(cp.__proto__)
+console.log(ColorPoint.prototype)
+console.log(cp instanceof Point)
+console.log(cp instanceof Color)
+
+</script>
+</html>

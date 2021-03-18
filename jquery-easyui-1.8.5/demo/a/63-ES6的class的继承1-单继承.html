@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+
+
+	<style>
+      
+	   
+    </style>
+</head>
+
+
+</body>
+<script>
+
+class Color{
+  constructor() {
+
+  }
+  printC(){
+	console.log(this.getValue())
+  }
+  
+  getValue(){
+	return this.x;
+  }
+  
+}
+class Point extends Color{
+  constructor() {
+	super();
+  }
+  printP(){
+	console.log(this.getValue())
+  }
+  
+  getValue(){
+	return this.y;
+  }
+}
+class ColorPoint extends Point {
+  constructor(x, y ,z) {
+
+    super();
+	this.x = x;
+	this.y = y;
+	this.z = z;
+  }
+  
+  getValue(){
+	return this.z;
+  }
+  printCP(){
+	this.printC();
+	this.printP();
+  }
+}
+
+
+console.log(ColorPoint)
+console.log(Object.getPrototypeOf(ColorPoint) === Point);//true
+
+console.log(Object.getPrototypeOf(ColorPoint) === Color);//false
+var cp = new ColorPoint(1,2,3);
+cp.printCP()
+
+</script>
+</html>

@@ -30,7 +30,9 @@ class Color{
   printC(){
 	console.log(this.getValue())
   }
-  
+  printX(){
+	console.log(this.x?this.x:"x 不存在");
+  }
   getValue(){
 	return this.x;
   }
@@ -43,17 +45,19 @@ class Point extends Color{
   printP(){
 	console.log(this.getValue())
   }
+  printY(){
+	console.log(this.y?this.y:"y 不存在")
+  }
   
   getValue(){
 	return this.y;
   }
 }
 class ColorPoint extends Point {
-  constructor(x, y ,z) {
+  constructor(z) {
 
     super();
-	this.x = x;
-	this.y = y;
+	
 	this.z = z;
   }
   
@@ -67,12 +71,11 @@ class ColorPoint extends Point {
 }
 
 
-console.log(ColorPoint)
 console.log(Object.getPrototypeOf(ColorPoint) === Point);//true
-
 console.log(Object.getPrototypeOf(ColorPoint) === Color);//false
 var cp = new ColorPoint(1,2,3);
 cp.printCP()
-
+cp.printX()
+cp.printY()
 </script>
 </html>
